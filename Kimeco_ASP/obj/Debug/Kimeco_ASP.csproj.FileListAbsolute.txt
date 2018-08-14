@@ -183,3 +183,4 @@ C:\Users\DELL\Documents\GitHub\Kimeco\Kimeco_ASP\obj\Debug\Kimeco_ASP.csproj.Cor
 C:\Users\DELL\Documents\GitHub\Kimeco\Kimeco_ASP\obj\Debug\Kimeco_ASP.csproj.CopyComplete
 C:\Users\DELL\Documents\GitHub\Kimeco\Kimeco_ASP\obj\Debug\Kimeco_ASP.dll
 C:\Users\DELL\Documents\GitHub\Kimeco\Kimeco_ASP\obj\Debug\Kimeco_ASP.pdb
+C:\Users\DELL\Documents\GitHub\Kimeco\Kimeco_ASP\obj\Debug\Kimeco_ASP.csprojAssemblyReference.cache
