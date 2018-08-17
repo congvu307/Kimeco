@@ -20,27 +20,49 @@ $(document).ready(function () {
                 loop: false
             }
         }
-    })
+    }) 
+    setInterval(function () {
+        if (!$(".timeline-nav-button--next").is(":disabled")) {
+            $('.timeline-nav-button--next').click();
+        }
+        else {
+            $('.timeline-nav-button--prev').click();
+        }
+    },3000)
     $(window).scroll(function () {
         if ($(this).scrollTop() > 100) {
-            $('#back-to-top').fadeIn();
+            $('#headerNav .nav-item .nav-link').addClass('text-white');
+            $("#headerNav").addClass('fixed-top');
+            $("#headerNav").addClass('padding0-tb');
+            $("#headerNav").addClass('background-blue-0p7');
+            $("#navbarSupportedContent").addClass('padding0-tb');
         } else {
-            $('#back-to-top').fadeOut();
+            $('#headerNav .nav-item .nav-link').removeClass('text-white');
+           
+            $('#headerNav').removeClass('padding0-tb');
+            $("#headerNav").removeClass('background-blue-0p7');
+            $('#navbarSupportedContent').removeClass('padding0-tb');
         }
     });
     // scroll body to 0px on click
     $('#back-to-top').click(function () {
-        $('#back-to-top').hide();
         $('body,html').animate({
             scrollTop: 0
         }, 800);
         return false;
     });
+    $('#back-to-bottom').click(function () {
+        $('body,html').animate({
+            scrollTop: $(document).height()
+        }, 800);
+        return false;
+    });
     $(".scrollTo").click(function () {
+       
         var target = $(this).data("scroll");
-        $('html, body').animate({
+        $('body, html').animate({
             scrollTop: $(target).offset().top
-        }, 2000);
+        }, 1000);
     });
     loadGallery(true, 'a.thumbnail');
 
@@ -53,12 +75,6 @@ $(document).ready(function () {
             $('#show-previous-image').hide();
         }
     }
-
-    /**
-     *
-     * @param setIDs        Sets IDs when DOM is loaded. If using a PHP counter, set to false.
-     * @param setClickAttr  Sets the attribute for the click handler.
-     */
 
     function loadGallery(setIDs, setClickAttr) {
         var current_image,
@@ -163,3 +179,6 @@ timeline(document.querySelectorAll('.timeline'), {
     visibleItems: 3,
     forceVerticalMode: 600
 });
+$(function () {
+    $('[data-toggle="tooltip"]').tooltip()
+})

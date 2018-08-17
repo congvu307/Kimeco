@@ -13,7 +13,7 @@ margin-1em-TB {
 }
 
 .nav-item .nav-link:hover {
-    border: 2px solid white;
+    border: 2px solid white !important;
 }
 
 .nav-link {
@@ -28,9 +28,9 @@ margin-1em-TB {
     bottom: -50px;
 }
 
-.nav-item .nav-link {
+.navbar-light .navbar-nav .nav-link {
     transition: all 1s;
-    color: white !important;
+    color: white;
     border: 2px solid rgba(0,0,0,0);
     border-radius: 5px;
 }
@@ -156,7 +156,7 @@ margin-1em-TB {
 }
 
 #historyOutside {
-    background-image: url('/Content/image/1088.jpg');
+    background-image: url('/Content/image/1088.png');
     background-size: cover;
 }
 
@@ -174,7 +174,7 @@ margin-1em-TB {
 }
 
 .text-blue {
-    color: #0B3A5F;
+    color: #0B3A5F !important;
 }
 
 .Services-Description {
@@ -239,22 +239,28 @@ margin-1em-TB {
 }
 
 #carouselExampleIndicators {
-    margin-top: -110px;
+    margin-top: -120px;
 }
 
 #navbarSupportedContent {
     z-index: 99;
+    transition: all 0.5s;
     padding-top: 15px;
     padding-bottom:10px;
 }
-
+.padding0-tb {
+    padding-top: 0;
+    padding-bottom:0;
+}
 .timeline__content {
     padding: 0.4em;
     background: none;
     color: white;
     border: 3px solid white;
 }
-
+#headerNav {
+    transition: all 0.5s;
+}
 #clientList {
     background-color: rgba(255, 255, 255,0.5);
     margin: 6em 1em 1em 1em;
@@ -270,7 +276,9 @@ margin-1em-TB {
 #clientList .item {
     border: 3px solid #0B3A5F;
 }
-
+.text-white{
+    color:white !important;
+}
 .background-blue-0p7 {
     background-color: rgba(11, 59, 95, 0.83) !important;
 }
@@ -311,7 +319,9 @@ margin-1em-TB {
 
 @media screen and (max-width: 991px) {
     #headerNav {
-        margin-bottom: 90px;
+        padding-top:0;
+        margin-bottom: 120px;
+        position:relative;
     }
 
         #headerNav .nav-item {
@@ -319,7 +329,7 @@ margin-1em-TB {
         }
 
             #headerNav .nav-item .nav-link {
-                color: #0B3A5F !important;
+                color: #0B3A5F;
             }
 }
 
@@ -328,18 +338,28 @@ margin-1em-TB {
 }
 
 .back-to-top {
+    transform: rotate(90deg);
+    -webkit-transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    color: white !important;
+    display: block !important;
+    height: 30px;
+    width: 30px;
     cursor: pointer;
     position: fixed;
-    bottom: 20px;
-    right: 20px;
+    bottom: 50px;
+    right: 30px;
     display: none;
-    z-index: 9999;
+    z-index: 9999 !important;
 }
-
-#ProjectGallery {
-    background-size: cover;
-    background: url('/Content/image/hero.jpg') ;
-}
+    .back-to-top a {
+       
+    }
+    #ProjectGallery {
+        background-size: cover;
+        background: url('/Content/image/hero.jpg');
+    }
 
     #ProjectGallery::before {
         background-color: rgba(255, 255, 255, 0.64);

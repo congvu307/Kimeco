@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Kimeco_ASP.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,9 +9,27 @@ namespace Kimeco_ASP.Controllers
 {
     public class HomeController : Controller
     {
+        public KimecoEntities db = new KimecoEntities();
+        public ActionResult History()
+        {
+           
+            return PartialView();
+        }
         public ActionResult Index()
         {
-            return View();
+            //List of project in history
+            var ListHistory = db.Histories.ToList().OrderByDescending(x => x.Period);
+            //list Period
+            var ListPeriod = new List<double?>();
+            foreach (var item in ListHistory)
+            {
+                if (!ListPeriod.Contains(item.Period))
+                {
+                    ListPeriod.Add(item.Period);
+                }
+            }
+            ViewData["ListPeriod"] = ListPeriod;
+            return View(ListHistory);
         }
 
         public ActionResult About()
