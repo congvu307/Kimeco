@@ -1,4 +1,6 @@
-
+html{
+    padding:0;
+}
 margin-1em-TB {
     margin-top: 1em !important;
     margin-bottom: 1em !important;
@@ -306,7 +308,7 @@ margin-1em-TB {
     .footer #foo {
         background-color: rgba(66, 66, 66, 0.50);
         padding: 1em;
-        width: 114%;
+        width: 112%;
         margin-left: -7%;
         margin-bottom: -2%;
         margin-top: 1em;
@@ -321,7 +323,7 @@ margin-1em-TB {
     #headerNav {
         padding-top:0;
         margin-bottom: 120px;
-        position:relative;
+        
     }
 
         #headerNav .nav-item {
