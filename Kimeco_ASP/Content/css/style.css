@@ -282,7 +282,7 @@ margin-1em-TB {
     color:white !important;
 }
 .background-blue-0p7 {
-    background-color: rgba(11, 59, 95, 0.83) !important;
+    background-color: rgba(11, 59, 95, 0.89) !important;
 }
 
 .footer .content {
@@ -321,6 +321,7 @@ margin-1em-TB {
 
 @media screen and (max-width: 991px) {
     #headerNav {
+        margin-top:-30px;
         padding-top:0;
         margin-bottom: 120px;
         
@@ -340,6 +341,7 @@ margin-1em-TB {
 }
 
 .back-to-top {
+    text-shadow: 2px 2px #0B3A5F;
     transform: rotate(90deg);
     -webkit-transform: rotate(90deg);
     -ms-transform: rotate(90deg);

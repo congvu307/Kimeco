@@ -29,25 +29,34 @@ $(document).ready(function () {
             $('.timeline-nav-button--prev').click();
         }
     }, 3000)
-    $(window).scroll(function () {
-        if ($(this).scrollTop() > 100) {
-            $('#headerNav .nav-item .nav-link').addClass('text-white');
-            $("#headerNav").addClass('fixed-top');
-            
-            $("#headerNav").addClass('padding0-tb');
-            $("#headerNav").addClass('background-blue-0p7');
-            $("#navbarSupportedContent").addClass('padding0-tb');
-        } else {
-            console.log($(window).width);
-            $('#headerNav .nav-item .nav-link').removeClass('text-white');
-            if (window.matchMedia('(max-width: 991px)').matches) {
+    if (!window.matchMedia('(max-width: 991px)').matches) {
+        $(window).scroll(function () {
+            if ($(this).scrollTop() > 100) {
+                $('#headerNav .nav-item .nav-link').addClass('text-white');
+                $("#headerNav").addClass('fixed-top');
+                $("#headerNav").addClass('padding0-tb');
+                $("#headerNav").addClass('background-blue-0p7');
+                $("#navbarSupportedContent").addClass('padding0-tb');
+            } else {
+                console.log($(window).width);
+                $('#headerNav .nav-item .nav-link').removeClass('text-white');
+
                 $("#headerNav").removeClass('fixed-top');
+                $('#headerNav').removeClass('padding0-tb');
+                $("#headerNav").removeClass('background-blue-0p7');
+                $('#navbarSupportedContent').removeClass('padding0-tb');
             }
-            $('#headerNav').removeClass('padding0-tb');
-            $("#headerNav").removeClass('background-blue-0p7');
-            $('#navbarSupportedContent').removeClass('padding0-tb');
-        }
-    });
+        });
+    } else {
+        $('#headerNav .nav-item .nav-link').addClass('text-white');
+        $("#headerNav").addClass('fixed-top');
+        $("#headerNav").addClass('padding0-tb');
+        $("#headerNav").addClass('background-blue-0p7');
+        $("#navbarSupportedContent").addClass('padding0-tb');
+        $('#carouselExampleIndicators').css('margin-top', '89px');
+        $('#headerNav').css('margin-top', '0px');
+
+    }
     // scroll body to 0px on click
     $('#back-to-top').click(function () {
         $('body,html').animate({
