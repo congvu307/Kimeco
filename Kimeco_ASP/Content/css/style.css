@@ -360,16 +360,21 @@ margin-1em-TB {
     .back-to-top a {
        
     }
-    #ProjectGallery {
-        background-size: cover;
-        background: url('/Content/image/hero.jpg');
-    }
+#ProjectGallery {
+    background-size: cover;
+    background: url('/Content/image/OCERHB0.jpg');
+}
 
-    #ProjectGallery::before {
-        background-color: rgba(255, 255, 255, 0.64);
-        content: '';
-        display: block;
-        height: 90%;
-        position: absolute;
-        width: 100%;
-    }
+   
+.click-to-call {
+    padding-left:6px;
+    border:1px solid #fff;
+    border-radius: 50%;
+    padding-top:1px;
+    width:30px;
+    height:30px;
+}
+#OurService {
+   
+    background-size:cover;
+}
