@@ -1,0 +1,109 @@
+﻿@model IEnumerable<Kimeco_ASP.Models.Cash>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+
+    @Html.ActionLink("Create New", "Create", null, new { @class = "btn" })
+
+</p>
+<a href="/admin/home/Cash_MultiUpload">Upload with Excel</a>
+
+<div id="d_CashMultiUpload">
+
+    <label id="MultiUpload-Loading"></label>
+
+</div>
+<div class="widget-box">
+    <div class="widget-title">
+        <span class="icon">
+            <i class="icon-th"></i>
+        </span>
+        <h5>Cash Table</h5>
+    </div>
+    <div class="nopadding">
+        <table class="table data-table table-bordered dataTable">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.C_Date)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Company)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ProjectName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Staff)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.C_Content)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Input)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Output)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Invoice)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Ref)
+                    </th>
+                   
+                   
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.C_Date)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Company)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ProjectName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Staff)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.C_Content)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Input)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Output)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Invoice)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Ref)
+                        </td>
+                        
+                        
+                       
+                        <td>
+                            @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+                            @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+                            @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

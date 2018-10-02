@@ -1,5 +1,43 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="KimecoModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Cash">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="_Date" Type="nvarchar" MaxLength="50" />
+    <Property Name="Company" Type="nvarchar" MaxLength="255" />
+    <Property Name="ProjectID" Type="int" />
+    <Property Name="Staff" Type="nvarchar" MaxLength="50" />
+    <Property Name="_Content" Type="nvarchar(max)" />
+    <Property Name="Input" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="Output" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="Invoice" Type="nvarchar" MaxLength="50" />
+    <Property Name="Ref" Type="nvarchar" MaxLength="255" />
+    <Property Name="CreateDate" Type="datetime" />
+    <Property Name="CreateBy" Type="int" />
+    <Property Name="Status" Type="bit" />
+    <Property Name="Note" Type="nvarchar" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="Cost">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Item" Type="nvarchar" MaxLength="255" />
+    <Property Name="Unit" Type="nvarchar" MaxLength="50" />
+    <Property Name="UnitPrice" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="SubTotal" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="Date" Type="datetime" />
+    <Property Name="ProjectID" Type="int" />
+    <Property Name="Conpany" Type="nvarchar" MaxLength="255" />
+    <Property Name="Tax" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="CreateDate" Type="datetime" />
+    <Property Name="CreateBy" Type="int" />
+    <Property Name="Status" Type="bit" />
+    <Property Name="Note" Type="nvarchar" MaxLength="255" />
+    <Property Name="Create" Type="nchar" MaxLength="10" />
+  </EntityType>
   <EntityType Name="History">
     <Key>
       <PropertyRef Name="ID" />
@@ -15,6 +53,34 @@
     <Property Name="Status" Type="bit" />
     <Property Name="CreateBy" Type="int" />
   </EntityType>
+  <EntityType Name="Project">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="255" />
+    <Property Name="Note" Type="nvarchar" MaxLength="255" />
+    <Property Name="CreateDate" Type="datetime" />
+    <Property Name="CreateBy" Type="int" />
+    <Property Name="Status" Type="bit" />
+  </EntityType>
+  <EntityType Name="Salary">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserID" Type="int" />
+    <Property Name="WorkingTime" Type="nvarchar" MaxLength="50" />
+    <Property Name="Date" Type="datetime" />
+    <Property Name="UnitPerHour" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="Advanced" Type="nvarchar" MaxLength="255" />
+    <Property Name="Gasoline" Type="nvarchar" MaxLength="255" />
+    <Property Name="ProjectID" Type="int" />
+    <Property Name="CreateDate" Type="datetime" />
+    <Property Name="CreateBy" Type="int" />
+    <Property Name="Status" Type="bit" />
+    <Property Name="Note" Type="nvarchar" MaxLength="255" />
+  </EntityType>
   <EntityType Name="User">
     <Key>
       <PropertyRef Name="ID" />
@@ -24,15 +90,87 @@
     <Property Name="Password" Type="nvarchar" MaxLength="50" />
     <Property Name="Email" Type="nvarchar" MaxLength="50" />
     <Property Name="Phone" Type="nvarchar" MaxLength="50" />
-    <Property Name="Note" Type="nvarchar" MaxLength="50" />
+    <Property Name="Position" Type="nvarchar" MaxLength="50" />
+    <Property Name="CreateDate" Type="datetime" />
+    <Property Name="CreateBy" Type="int" />
+    <Property Name="Status1" Type="bit" />
+    <Property Name="Note" Type="nvarchar" MaxLength="255" />
     <Property Name="Status" Type="nchar" MaxLength="10" />
   </EntityType>
+  <Association Name="FK_Cash_Project">
+    <End Role="Project" Type="Self.Project" Multiplicity="0..1" />
+    <End Role="Cash" Type="Self.Cash" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Project">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Cash">
+        <PropertyRef Name="ProjectID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Cost_Project">
+    <End Role="Project" Type="Self.Project" Multiplicity="0..1" />
+    <End Role="Cost" Type="Self.Cost" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Project">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Cost">
+        <PropertyRef Name="ProjectID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Salary_Project">
+    <End Role="Project" Type="Self.Project" Multiplicity="0..1" />
+    <End Role="Salary" Type="Self.Salary" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Project">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Salary">
+        <PropertyRef Name="ProjectID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Salary_User">
+    <End Role="User" Type="Self.User" Multiplicity="0..1" />
+    <End Role="Salary" Type="Self.Salary" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Salary">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Function Name="Check_Login" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="Username" Type="nvarchar" Mode="In" />
     <Parameter Name="Password" Type="nvarchar" Mode="In" />
   </Function>
   <EntityContainer Name="KimecoModelStoreContainer">
+    <EntitySet Name="Cash" EntityType="Self.Cash" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Cost" EntityType="Self.Cost" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="History" EntityType="Self.History" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Project" EntityType="Self.Project" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Salary" EntityType="Self.Salary" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Cash_Project" Association="Self.FK_Cash_Project">
+      <End Role="Project" EntitySet="Project" />
+      <End Role="Cash" EntitySet="Cash" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Cost_Project" Association="Self.FK_Cost_Project">
+      <End Role="Project" EntitySet="Project" />
+      <End Role="Cost" EntitySet="Cost" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Salary_Project" Association="Self.FK_Salary_Project">
+      <End Role="Project" EntitySet="Project" />
+      <End Role="Salary" EntitySet="Salary" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Salary_User" Association="Self.FK_Salary_User">
+      <End Role="User" EntitySet="User" />
+      <End Role="Salary" EntitySet="Salary" />
+    </AssociationSet>
   </EntityContainer>
 </Schema>

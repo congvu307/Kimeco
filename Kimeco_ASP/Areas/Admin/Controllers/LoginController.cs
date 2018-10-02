@@ -31,5 +31,10 @@ namespace Kimeco_ASP.Areas.Admin.Controllers
             }
             return View();
         }
+        public ActionResult Logout()
+        {
+            FormsAuthentication.SignOut();
+            return RedirectToAction("Index", "Home");
+        }
     }
 }

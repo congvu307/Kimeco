@@ -1,6 +1,46 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="KimecoModelStoreContainer" CdmEntityContainer="KimecoEntities">
+    <EntitySetMapping Name="Cashes">
+      <EntityTypeMapping TypeName="KimecoModel.Cash">
+        <MappingFragment StoreEntitySet="Cash">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="C_Date" ColumnName="_Date" />
+          <ScalarProperty Name="Company" ColumnName="Company" />
+          <ScalarProperty Name="ProjectID" ColumnName="ProjectID" />
+          <ScalarProperty Name="Staff" ColumnName="Staff" />
+          <ScalarProperty Name="C_Content" ColumnName="_Content" />
+          <ScalarProperty Name="Input" ColumnName="Input" />
+          <ScalarProperty Name="Output" ColumnName="Output" />
+          <ScalarProperty Name="Invoice" ColumnName="Invoice" />
+          <ScalarProperty Name="Ref" ColumnName="Ref" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Note" ColumnName="Note" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Costs">
+      <EntityTypeMapping TypeName="KimecoModel.Cost">
+        <MappingFragment StoreEntitySet="Cost">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Item" ColumnName="Item" />
+          <ScalarProperty Name="Unit" ColumnName="Unit" />
+          <ScalarProperty Name="UnitPrice" ColumnName="UnitPrice" />
+          <ScalarProperty Name="SubTotal" ColumnName="SubTotal" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="ProjectID" ColumnName="ProjectID" />
+          <ScalarProperty Name="Conpany" ColumnName="Conpany" />
+          <ScalarProperty Name="Tax" ColumnName="Tax" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Note" ColumnName="Note" />
+          <ScalarProperty Name="Create" ColumnName="Create" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="Histories">
       <EntityTypeMapping TypeName="KimecoModel.History">
         <MappingFragment StoreEntitySet="History">
@@ -17,6 +57,36 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="Projects">
+      <EntityTypeMapping TypeName="KimecoModel.Project">
+        <MappingFragment StoreEntitySet="Project">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Note" ColumnName="Note" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Salaries">
+      <EntityTypeMapping TypeName="KimecoModel.Salary">
+        <MappingFragment StoreEntitySet="Salary">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="WorkingTime" ColumnName="WorkingTime" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="UnitPerHour" ColumnName="UnitPerHour" />
+          <ScalarProperty Name="Advanced" ColumnName="Advanced" />
+          <ScalarProperty Name="Gasoline" ColumnName="Gasoline" />
+          <ScalarProperty Name="ProjectID" ColumnName="ProjectID" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Note" ColumnName="Note" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="Users">
       <EntityTypeMapping TypeName="KimecoModel.User">
         <MappingFragment StoreEntitySet="User">
@@ -25,6 +95,10 @@
           <ScalarProperty Name="Password" ColumnName="Password" />
           <ScalarProperty Name="Email" ColumnName="Email" />
           <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="Position" ColumnName="Position" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+          <ScalarProperty Name="Status1" ColumnName="Status1" />
           <ScalarProperty Name="Note" ColumnName="Note" />
           <ScalarProperty Name="Status" ColumnName="Status" />
         </MappingFragment>

@@ -1,0 +1,123 @@
+﻿@model Kimeco_ASP.Models.Cash
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Cash</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.C_Date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.C_Date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Company)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Company)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProjectName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProjectName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Staff)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Staff)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.C_Content)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.C_Content)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Input)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Input)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Output)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Output)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Invoice)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Invoice)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Ref)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Ref)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreateDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreateDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreateBy)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreateBy)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Status)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Status)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Note)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Note)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

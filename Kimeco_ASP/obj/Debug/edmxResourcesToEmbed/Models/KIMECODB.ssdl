@@ -1,19 +1,87 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="KimecoModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Cash">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="_Date" Type="nvarchar" MaxLength="50" />
+    <Property Name="Company" Type="nvarchar" MaxLength="255" />
+    <Property Name="ProjectName" Type="nvarchar" MaxLength="250" />
+    <Property Name="Staff" Type="nvarchar" MaxLength="250" />
+    <Property Name="_Content" Type="nvarchar(max)" />
+    <Property Name="Input" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="Output" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="Invoice" Type="nvarchar" MaxLength="50" />
+    <Property Name="Ref" Type="nvarchar" MaxLength="255" />
+    <Property Name="CreateDate" Type="datetime" />
+    <Property Name="CreateBy" Type="int" />
+    <Property Name="Status" Type="bit" />
+    <Property Name="Note" Type="nvarchar" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="Cost">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Item" Type="nvarchar" MaxLength="255" />
+    <Property Name="Unit" Type="nvarchar" MaxLength="50" />
+    <Property Name="UnitPrice" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="SubTotal" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="Date" Type="datetime" />
+    <Property Name="ProjectID" Type="nvarchar" MaxLength="250" />
+    <Property Name="Conpany" Type="nvarchar" MaxLength="255" />
+    <Property Name="Tax" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="CreateDate" Type="datetime" />
+    <Property Name="CreateBy" Type="int" />
+    <Property Name="Status" Type="bit" />
+    <Property Name="Note" Type="nvarchar" MaxLength="255" />
+    <Property Name="Quantity" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="VAT" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="Total" Type="decimal" Precision="18" Scale="0" />
+  </EntityType>
   <EntityType Name="History">
     <Key>
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="WorkScope" Type="nvarchar" MaxLength="100" />
-    <Property Name="ProjectName" Type="nvarchar" MaxLength="200" />
-    <Property Name="Client" Type="nvarchar" MaxLength="200" />
-    <Property Name="Country" Type="nvarchar" MaxLength="50" />
-    <Property Name="Period" Type="int" />
+    <Property Name="WorkScope" Type="nvarchar" MaxLength="255" />
+    <Property Name="ProjectName" Type="nvarchar" MaxLength="255" />
+    <Property Name="Client" Type="nvarchar" MaxLength="255" />
+    <Property Name="Country" Type="nvarchar" MaxLength="255" />
+    <Property Name="Period" Type="float" />
     <Property Name="CreateDate" Type="datetime" />
-    <Property Name="CreateBy" Type="int" />
     <Property Name="Note" Type="nvarchar" MaxLength="50" />
     <Property Name="Status" Type="bit" />
+    <Property Name="CreateBy" Type="int" />
+  </EntityType>
+  <EntityType Name="Project">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="nvarchar" MaxLength="250" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="255" />
+    <Property Name="Note" Type="nvarchar" MaxLength="255" />
+    <Property Name="CreateDate" Type="datetime" />
+    <Property Name="CreateBy" Type="int" />
+    <Property Name="Status" Type="bit" />
+  </EntityType>
+  <EntityType Name="Salary">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserID" Type="int" />
+    <Property Name="WorkingTime" Type="nvarchar" MaxLength="50" />
+    <Property Name="Date" Type="datetime" />
+    <Property Name="UnitPerHour" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="Advanced" Type="nvarchar" MaxLength="255" />
+    <Property Name="Gasoline" Type="nvarchar" MaxLength="255" />
+    <Property Name="ProjectID" Type="nvarchar" MaxLength="250" />
+    <Property Name="CreateDate" Type="datetime" />
+    <Property Name="CreateBy" Type="int" />
+    <Property Name="Status" Type="bit" />
+    <Property Name="Note" Type="nvarchar" MaxLength="255" />
   </EntityType>
   <EntityType Name="User">
     <Key>
@@ -24,7 +92,11 @@
     <Property Name="Password" Type="nvarchar" MaxLength="50" />
     <Property Name="Email" Type="nvarchar" MaxLength="50" />
     <Property Name="Phone" Type="nvarchar" MaxLength="50" />
-    <Property Name="Note" Type="nvarchar" MaxLength="50" />
+    <Property Name="Position" Type="nvarchar" MaxLength="50" />
+    <Property Name="CreateDate" Type="datetime" />
+    <Property Name="CreateBy" Type="int" />
+    <Property Name="Status1" Type="bit" />
+    <Property Name="Note" Type="nvarchar" MaxLength="255" />
     <Property Name="Status" Type="nchar" MaxLength="10" />
   </EntityType>
   <Function Name="Check_Login" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
@@ -32,7 +104,11 @@
     <Parameter Name="Password" Type="nvarchar" Mode="In" />
   </Function>
   <EntityContainer Name="KimecoModelStoreContainer">
+    <EntitySet Name="Cash" EntityType="Self.Cash" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Cost" EntityType="Self.Cost" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="History" EntityType="Self.History" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Project" EntityType="Self.Project" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Salary" EntityType="Self.Salary" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
   </EntityContainer>
 </Schema>

@@ -19,6 +19,10 @@ namespace Kimeco_ASP.Models
         public string Password { get; set; }
         public string Email { get; set; }
         public string Phone { get; set; }
+        public string Position { get; set; }
+        public Nullable<System.DateTime> CreateDate { get; set; }
+        public Nullable<int> CreateBy { get; set; }
+        public Nullable<bool> Status1 { get; set; }
         public string Note { get; set; }
         public string Status { get; set; }
     }

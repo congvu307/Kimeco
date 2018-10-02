@@ -1,19 +1,87 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="KimecoModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Cash">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="C_Date" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Company" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="ProjectName" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="Staff" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="C_Content" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Input" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Output" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Invoice" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Ref" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="CreateDate" Type="DateTime" Precision="3" />
+    <Property Name="CreateBy" Type="Int32" />
+    <Property Name="Status" Type="Boolean" />
+    <Property Name="Note" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Cost">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Item" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Unit" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="UnitPrice" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="SubTotal" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Date" Type="DateTime" Precision="3" />
+    <Property Name="ProjectID" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="Conpany" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Tax" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="CreateDate" Type="DateTime" Precision="3" />
+    <Property Name="CreateBy" Type="Int32" />
+    <Property Name="Status" Type="Boolean" />
+    <Property Name="Note" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Quantity" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="VAT" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Total" Type="Decimal" Precision="18" Scale="0" />
+  </EntityType>
   <EntityType Name="History">
     <Key>
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="WorkScope" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-    <Property Name="ProjectName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-    <Property Name="Client" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-    <Property Name="Country" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Period" Type="Int32" />
+    <Property Name="WorkScope" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="ProjectName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Client" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Country" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Period" Type="Double" />
     <Property Name="CreateDate" Type="DateTime" Precision="3" />
-    <Property Name="CreateBy" Type="Int32" />
     <Property Name="Note" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="Status" Type="Boolean" />
+    <Property Name="CreateBy" Type="Int32" />
+  </EntityType>
+  <EntityType Name="Project">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Note" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="CreateDate" Type="DateTime" Precision="3" />
+    <Property Name="CreateBy" Type="Int32" />
+    <Property Name="Status" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="Salary">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserID" Type="Int32" />
+    <Property Name="WorkingTime" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Date" Type="DateTime" Precision="3" />
+    <Property Name="UnitPerHour" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Advanced" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Gasoline" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="ProjectID" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="CreateDate" Type="DateTime" Precision="3" />
+    <Property Name="CreateBy" Type="Int32" />
+    <Property Name="Status" Type="Boolean" />
+    <Property Name="Note" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="User">
     <Key>
@@ -24,11 +92,19 @@
     <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Note" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Position" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="CreateDate" Type="DateTime" Precision="3" />
+    <Property Name="CreateBy" Type="Int32" />
+    <Property Name="Status1" Type="Boolean" />
+    <Property Name="Note" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
     <Property Name="Status" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
   </EntityType>
   <EntityContainer Name="KimecoEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Cashes" EntityType="Self.Cash" />
+    <EntitySet Name="Costs" EntityType="Self.Cost" />
     <EntitySet Name="Histories" EntityType="Self.History" />
+    <EntitySet Name="Projects" EntityType="Self.Project" />
+    <EntitySet Name="Salaries" EntityType="Self.Salary" />
     <EntitySet Name="Users" EntityType="Self.User" />
     <FunctionImport Name="Check_Login" ReturnType="Collection(Boolean)">
       <Parameter Name="Username" Mode="In" Type="String" />

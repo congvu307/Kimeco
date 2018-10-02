@@ -187,4 +187,9 @@ C:\Users\DELL\Documents\GitHub\Kimeco\Kimeco_ASP\bin\EntityFramework.dll
 C:\Users\DELL\Documents\GitHub\Kimeco\Kimeco_ASP\bin\EntityFramework.SqlServer.dll
 C:\Users\DELL\Documents\GitHub\Kimeco\Kimeco_ASP\bin\EntityFramework.xml
 C:\Users\DELL\Documents\GitHub\Kimeco\Kimeco_ASP\bin\EntityFramework.SqlServer.xml
-C:\Users\DELL\Documents\GitHub\Kimeco\Kimeco_ASP\obj\Debug\Kimeco_ASP.csprojAssemblyReference.cache
+C:\Users\DELL\Documents\GitHub\Kimeco\Kimeco_ASP\bin\ICSharpCode.SharpZipLib.dll
+C:\Users\DELL\Documents\GitHub\Kimeco\Kimeco_ASP\bin\NPOI.dll
+C:\Users\DELL\Documents\GitHub\Kimeco\Kimeco_ASP\bin\NPOI.OOXML.dll
+C:\Users\DELL\Documents\GitHub\Kimeco\Kimeco_ASP\bin\NPOI.OpenXml4Net.dll
+C:\Users\DELL\Documents\GitHub\Kimeco\Kimeco_ASP\bin\NPOI.OpenXmlFormats.dll
+C:\Users\DELL\Documents\GitHub\Kimeco\Kimeco_ASP\bin\NPOI.xml

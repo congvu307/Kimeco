@@ -1,0 +1,21 @@
+﻿
+@{
+    ViewBag.Title = "Cash Multi Upload";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Site Cost Multi Upload</h2>
+
+@using (Html.BeginForm("SiteCost_Upload", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+
+    <div>
+        @Html.TextBox("file", "", new { type = "file", name = "file" }) <br />
+
+        <input class="btn" type="submit" value="Upload" />
+        @Html.Raw(ViewBag.Message)
+
+    </div>
+
+
+}
