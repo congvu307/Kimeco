@@ -5,9 +5,9 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="C_Date" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="C_Date" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="Company" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Name="ProjectName" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="ProjectName" Type="Int32" />
     <Property Name="Staff" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
     <Property Name="C_Content" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="Input" Type="Decimal" Precision="18" Scale="0" />
@@ -15,7 +15,7 @@
     <Property Name="Invoice" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="Ref" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
     <Property Name="CreateDate" Type="DateTime" Precision="3" />
-    <Property Name="CreateBy" Type="Int32" />
+    <Property Name="CreateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="Status" Type="Boolean" />
     <Property Name="Note" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
   </EntityType>
@@ -29,7 +29,7 @@
     <Property Name="UnitPrice" Type="Decimal" Precision="18" Scale="0" />
     <Property Name="SubTotal" Type="Decimal" Precision="18" Scale="0" />
     <Property Name="Date" Type="DateTime" Precision="3" />
-    <Property Name="ProjectID" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="ProjectID" Type="Int32" />
     <Property Name="Conpany" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
     <Property Name="Tax" Type="Decimal" Precision="18" Scale="0" />
     <Property Name="CreateDate" Type="DateTime" Precision="3" />
@@ -59,56 +59,137 @@
     <Key>
       <PropertyRef Name="ID" />
     </Key>
-    <Property Name="ID" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
     <Property Name="Note" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
     <Property Name="CreateDate" Type="DateTime" Precision="3" />
     <Property Name="CreateBy" Type="Int32" />
     <Property Name="Status" Type="Boolean" />
+    <NavigationProperty Name="CashReports" Relationship="KimecoModel.FK_CashReport_Project" FromRole="Project" ToRole="CashReport" />
   </EntityType>
-  <EntityType Name="Salary">
+  <EntityType Name="Team">
     <Key>
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="UserID" Type="Int32" />
-    <Property Name="WorkingTime" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Date" Type="DateTime" Precision="3" />
-    <Property Name="UnitPerHour" Type="Decimal" Precision="18" Scale="0" />
-    <Property Name="Advanced" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Name="Gasoline" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Name="ProjectID" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="Name" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="ProjectID" Type="Int32" />
     <Property Name="CreateDate" Type="DateTime" Precision="3" />
-    <Property Name="CreateBy" Type="Int32" />
-    <Property Name="Status" Type="Boolean" />
-    <Property Name="Note" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="CreateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Note" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="User">
     <Key>
-      <PropertyRef Name="ID" />
+      <PropertyRef Name="Username" />
     </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="FullName" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
     <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="Position" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="CreateDate" Type="DateTime" Precision="3" />
     <Property Name="CreateBy" Type="Int32" />
-    <Property Name="Status1" Type="Boolean" />
     <Property Name="Note" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
     <Property Name="Status" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <NavigationProperty Name="Salaries" Relationship="KimecoModel.FK_Salary_User" FromRole="User" ToRole="Salary" />
   </EntityType>
   <EntityContainer Name="KimecoEntities" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="Cashes" EntityType="Self.Cash" />
     <EntitySet Name="Costs" EntityType="Self.Cost" />
     <EntitySet Name="Histories" EntityType="Self.History" />
     <EntitySet Name="Projects" EntityType="Self.Project" />
-    <EntitySet Name="Salaries" EntityType="Self.Salary" />
+    <EntitySet Name="Teams" EntityType="Self.Team" />
     <EntitySet Name="Users" EntityType="Self.User" />
     <FunctionImport Name="Check_Login" ReturnType="Collection(Boolean)">
       <Parameter Name="Username" Mode="In" Type="String" />
       <Parameter Name="Password" Mode="In" Type="String" />
     </FunctionImport>
+    <EntitySet Name="Equipment_Category" EntityType="KimecoModel.Equipment_Category" />
+    <EntitySet Name="Salaries" EntityType="KimecoModel.Salary" />
+    <AssociationSet Name="FK_Salary_User" Association="KimecoModel.FK_Salary_User">
+      <End Role="User" EntitySet="Users" />
+      <End Role="Salary" EntitySet="Salaries" />
+    </AssociationSet>
+    <EntitySet Name="CashReports" EntityType="KimecoModel.CashReport" />
+    <AssociationSet Name="FK_CashReport_Project" Association="KimecoModel.FK_CashReport_Project">
+      <End Role="Project" EntitySet="Projects" />
+      <End Role="CashReport" EntitySet="CashReports" />
+    </AssociationSet>
   </EntityContainer>
+  <EntityType Name="Equipment_Category">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="CreateDate" Type="DateTime" Precision="3" />
+    <Property Name="CreateBy" Type="Int32" />
+    <Property Name="Status" Type="Boolean" />
+    <Property Name="Note" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Salary">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="WorkingTime" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Date" Type="DateTime" Precision="3" />
+    <Property Name="UnitPerHour" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Advanced" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Allowance" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="TeamID" Type="Int32" />
+    <Property Name="CreateDate" Type="DateTime" Precision="3" />
+    <Property Name="CreateBy" Type="Int32" />
+    <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Note" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Value" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Sign" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="User" Relationship="KimecoModel.FK_Salary_User" FromRole="Salary" ToRole="User" />
+  </EntityType>
+  <Association Name="FK_Salary_User">
+    <End Type="KimecoModel.User" Role="User" Multiplicity="0..1" />
+    <End Type="KimecoModel.Salary" Role="Salary" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Username" />
+      </Principal>
+      <Dependent Role="Salary">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="CashReport">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ProjectName" Type="Int32" />
+    <Property Name="LastMonthRemain" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="SubTotalInput" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="SubTotalOutput" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="BankRemain" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="CashInHand" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="ProjectTotal" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="CreateDate" Type="DateTime" Precision="3" />
+    <Property Name="CreateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Note" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Status" Type="Boolean" />
+    <NavigationProperty Name="Project" Relationship="KimecoModel.FK_CashReport_Project" FromRole="CashReport" ToRole="Project" />
+  </EntityType>
+  <Association Name="FK_CashReport_Project">
+    <End Type="KimecoModel.Project" Role="Project" Multiplicity="0..1" />
+    <End Type="KimecoModel.CashReport" Role="CashReport" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Project">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CashReport">
+        <PropertyRef Name="ProjectName" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>

@@ -14,16 +14,24 @@ namespace Kimeco_ASP.Models
     
     public partial class User
     {
-        public int ID { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public User()
+        {
+            this.Salaries = new HashSet<Salary>();
+        }
+    
         public string Username { get; set; }
         public string Password { get; set; }
+        public string FullName { get; set; }
         public string Email { get; set; }
         public string Phone { get; set; }
         public string Position { get; set; }
         public Nullable<System.DateTime> CreateDate { get; set; }
         public Nullable<int> CreateBy { get; set; }
-        public Nullable<bool> Status1 { get; set; }
         public string Note { get; set; }
         public string Status { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Salary> Salaries { get; set; }
     }
 }

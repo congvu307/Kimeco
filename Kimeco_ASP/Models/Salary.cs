@@ -15,16 +15,20 @@ namespace Kimeco_ASP.Models
     public partial class Salary
     {
         public int ID { get; set; }
-        public Nullable<int> UserID { get; set; }
+        public string UserID { get; set; }
         public string WorkingTime { get; set; }
         public Nullable<System.DateTime> Date { get; set; }
         public Nullable<decimal> UnitPerHour { get; set; }
         public string Advanced { get; set; }
-        public string Gasoline { get; set; }
-        public string ProjectID { get; set; }
+        public Nullable<decimal> Allowance { get; set; }
+        public Nullable<int> TeamID { get; set; }
         public Nullable<System.DateTime> CreateDate { get; set; }
         public Nullable<int> CreateBy { get; set; }
-        public Nullable<bool> Status { get; set; }
+        public string Status { get; set; }
         public string Note { get; set; }
+        public Nullable<decimal> Value { get; set; }
+        public string Sign { get; set; }
+    
+        public virtual User User { get; set; }
     }
 }

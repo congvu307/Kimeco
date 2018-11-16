@@ -1,0 +1,135 @@
+﻿@model IEnumerable<Kimeco_ASP.Models.Salary>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>List Salary Content</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create", null, new { @class = "btn" })
+    <a href="/admin/salaries/MultiUpload">Upload with Excel</a>
+</p>
+<div class="p-2">
+    <form method="post" action="/admin/salaries/Team_Report">
+        @{
+            var listTeam = ViewData["ListTeam"] as List<Kimeco_ASP.Models.Team>;
+        }
+        <select name="TeamID" style="width:300px;">
+            @foreach (var item in listTeam)
+            {
+                <option value="@item.ID">@item.Name</option>
+            }
+        </select>
+        <input type="submit" class="btn" value="Export Report" />
+    </form>
+</div>
+<div class="widget-box">
+    <div class="widget-title">
+        <span class="icon">
+            <i class="icon-th"></i>
+        </span>
+        <h5>Cash Table</h5>
+    </div>
+    <div class="nopadding">
+        <table class="table data-table table-bordered dataTable">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.UserID)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.WorkingTime)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Date)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.UnitPerHour)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Advanced)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Allowance)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.TeamID)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.CreateDate)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.CreateBy)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Status)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Note)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Value)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Sign)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.UserID)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.WorkingTime)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Date)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.UnitPerHour)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Advanced)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Allowance)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.TeamID)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CreateDate)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CreateBy)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Status)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Note)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Value)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Sign)
+                        </td>
+                        <td>
+                            @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+                            @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+                            @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

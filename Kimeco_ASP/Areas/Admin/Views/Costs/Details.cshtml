@@ -1,0 +1,139 @@
+﻿@model Kimeco_ASP.Models.Cost
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Cost</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Item)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Item)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Unit)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Unit)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UnitPrice)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UnitPrice)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SubTotal)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SubTotal)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProjectID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProjectID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Conpany)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Conpany)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Tax)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Tax)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreateDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreateDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreateBy)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreateBy)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Status)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Status)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Note)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Note)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Quantity)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Quantity)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.VAT)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.VAT)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Total)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Total)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

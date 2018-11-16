@@ -21,7 +21,7 @@ namespace Kimeco_ASP.Areas.Admin.Controllers
         }
 
         // GET: Admin/Projects/Details/5
-        public ActionResult Details(string id)
+        public ActionResult Details(int? id)
         {
             if (id == null)
             {
@@ -59,7 +59,7 @@ namespace Kimeco_ASP.Areas.Admin.Controllers
         }
 
         // GET: Admin/Projects/Edit/5
-        public ActionResult Edit(string id)
+        public ActionResult Edit(int? id)
         {
             if (id == null)
             {
@@ -90,7 +90,7 @@ namespace Kimeco_ASP.Areas.Admin.Controllers
         }
 
         // GET: Admin/Projects/Delete/5
-        public ActionResult Delete(string id)
+        public ActionResult Delete(int? id)
         {
             if (id == null)
             {
@@ -107,7 +107,7 @@ namespace Kimeco_ASP.Areas.Admin.Controllers
         // POST: Admin/Projects/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(string id)
+        public ActionResult DeleteConfirmed(int id)
         {
             Project project = db.Projects.Find(id);
             db.Projects.Remove(project);

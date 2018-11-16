@@ -1,0 +1,107 @@
+﻿@model IEnumerable<Kimeco_ASP.Models.Cost>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create",null,new {@class = "btn" })
+</p>
+<a href="/admin/home/SiteCost_Upload">Upload with Excel</a>
+<div class="widget-box">
+    <div class="widget-title">
+        <span class="icon">
+            <i class="icon-th"></i>
+        </span>
+        <h5>Cash Table</h5>
+    </div>
+    <div class="nopadding">
+        <table class="table data-table table-bordered dataTable">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Item)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Unit)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.UnitPrice)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.SubTotal)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Date)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ProjectID)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Conpany)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Note)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Quantity)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.VAT)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Total)
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Item)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Unit)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.UnitPrice)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.SubTotal)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Date)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ProjectID)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Conpany)
+                    </td>
+                    
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Note)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Quantity)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.VAT)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Total)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+                        @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+                    </td>
+                </tr>
+            }
+
+        </table>
+    </div>
+</div>

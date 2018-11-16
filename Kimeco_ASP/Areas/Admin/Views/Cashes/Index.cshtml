@@ -6,14 +6,33 @@
 }
 
 <h2>Index</h2>
-
-<p>
-
-    @Html.ActionLink("Create New", "Create", null, new { @class = "btn" })
-
-</p>
-<a href="/admin/home/Cash_MultiUpload">Upload with Excel</a>
-
+<div class="d-flex justify-content-around">
+    <div class="p-2">
+        <p>
+            @Html.ActionLink("Create New", "Create", null, new { @class = "btn" })
+        </p>
+        <a href="/admin/home/Cash_MultiUpload">Upload with Excel</a><br />
+        <a href="/admin/cashes/spending">Spending</a>
+        <br />
+        <hr />
+    </div>
+    <div class="p-2">
+        <form method="post" action="/admin/home/Cashes_Report">
+            @{
+                var listProject = ViewData["listProject"] as List<Kimeco_ASP.Models.Project>;
+            }
+            <select name="projectID" style="width:300px;">
+                @foreach (var item in listProject)
+                {
+                    <option value="@item.ID">@item.Name</option>
+                }
+            </select>
+            <input type="submit" class="btn" value="Export Report" />
+        </form>
+    </div>
+</div>
+<a class="btn" href="~/Admin/Home/Cash_TotalReport">Total Report</a>
+<a class="btn" href="~/Admin/Home/Cash_General_Report">General Report</a>
 <div id="d_CashMultiUpload">
 
     <label id="MultiUpload-Loading"></label>
@@ -52,56 +71,49 @@
                         @Html.DisplayNameFor(model => model.Output)
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.Invoice)
-                    </th>
-                    <th>
                         @Html.DisplayNameFor(model => model.Ref)
                     </th>
-                   
-                   
+
+
                     <th></th>
                 </tr>
             </thead>
             <tbody>
                 @foreach (var item in Model)
                 {
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.C_Date)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Company)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.ProjectName)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Staff)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.C_Content)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Input)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Output)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Invoice)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Ref)
-                        </td>
-                        
-                        
-                       
-                        <td>
-                            @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
-                            @Html.ActionLink("Details", "Details", new { id = item.ID }) |
-                            @Html.ActionLink("Delete", "Delete", new { id = item.ID })
-                        </td>
-                    </tr>
+                    if (item.Status == true &&item.Note != "Disable")
+                    {
+                        <tr>
+                            <td>
+                                @Html.TextBoxFor(modelItem => item.C_Date, "{0:dd/MM/yyyy}")
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Company)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ProjectName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Staff)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.C_Content)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Input)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Output)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Ref)
+                            </td>
+                            <td>
+                                <a href="/admin/cashes/edit/@item.ID">Edit</a>
+                                <a href="/admin/cashes/delete/@item.ID">Del</a>
+                            </td>
+                        </tr>
+                    }
                 }
             </tbody>
         </table>

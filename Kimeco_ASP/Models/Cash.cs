@@ -15,9 +15,9 @@ namespace Kimeco_ASP.Models
     public partial class Cash
     {
         public int ID { get; set; }
-        public string C_Date { get; set; }
+        public System.DateTime C_Date { get; set; }
         public string Company { get; set; }
-        public string ProjectName { get; set; }
+        public Nullable<int> ProjectName { get; set; }
         public string Staff { get; set; }
         public string C_Content { get; set; }
         public Nullable<decimal> Input { get; set; }
@@ -25,7 +25,7 @@ namespace Kimeco_ASP.Models
         public string Invoice { get; set; }
         public string Ref { get; set; }
         public Nullable<System.DateTime> CreateDate { get; set; }
-        public Nullable<int> CreateBy { get; set; }
+        public string CreateBy { get; set; }
         public Nullable<bool> Status { get; set; }
         public string Note { get; set; }
     }

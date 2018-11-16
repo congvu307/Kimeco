@@ -1,0 +1,22 @@
+﻿
+@{
+    ViewBag.Title = "MultiUpload";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Salaries Multi Upload</h2>
+
+@using (Html.BeginForm("MultiUpload", "Salaries", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+
+    <div>
+        @Html.TextBox("file", "", new { type = "file", name = "file" }) <br />
+
+        <input class="btn" type="submit" value="Upload" />
+        @Html.Raw(ViewBag.Message)
+
+    </div>
+
+
+}
+@Html.ActionLink("Download Template", "TemplateUpdate", "Salaries")

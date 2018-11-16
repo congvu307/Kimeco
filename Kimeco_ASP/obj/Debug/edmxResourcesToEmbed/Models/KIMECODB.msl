@@ -24,9 +24,6 @@
     <EntitySetMapping Name="Costs">
       <EntityTypeMapping TypeName="KimecoModel.Cost">
         <MappingFragment StoreEntitySet="Cost">
-          <ScalarProperty Name="Total" ColumnName="Total" />
-          <ScalarProperty Name="VAT" ColumnName="VAT" />
-          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="Item" ColumnName="Item" />
           <ScalarProperty Name="Unit" ColumnName="Unit" />
@@ -40,6 +37,9 @@
           <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
           <ScalarProperty Name="Status" ColumnName="Status" />
           <ScalarProperty Name="Note" ColumnName="Note" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="VAT" ColumnName="VAT" />
+          <ScalarProperty Name="Total" ColumnName="Total" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -71,16 +71,11 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Salaries">
-      <EntityTypeMapping TypeName="KimecoModel.Salary">
-        <MappingFragment StoreEntitySet="Salary">
+    <EntitySetMapping Name="Teams">
+      <EntityTypeMapping TypeName="KimecoModel.Team">
+        <MappingFragment StoreEntitySet="Team">
           <ScalarProperty Name="ID" ColumnName="ID" />
-          <ScalarProperty Name="UserID" ColumnName="UserID" />
-          <ScalarProperty Name="WorkingTime" ColumnName="WorkingTime" />
-          <ScalarProperty Name="Date" ColumnName="Date" />
-          <ScalarProperty Name="UnitPerHour" ColumnName="UnitPerHour" />
-          <ScalarProperty Name="Advanced" ColumnName="Advanced" />
-          <ScalarProperty Name="Gasoline" ColumnName="Gasoline" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="ProjectID" ColumnName="ProjectID" />
           <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
           <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
@@ -92,20 +87,70 @@
     <EntitySetMapping Name="Users">
       <EntityTypeMapping TypeName="KimecoModel.User">
         <MappingFragment StoreEntitySet="User">
-          <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="Username" ColumnName="Username" />
           <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="FullName" ColumnName="FullName" />
           <ScalarProperty Name="Email" ColumnName="Email" />
           <ScalarProperty Name="Phone" ColumnName="Phone" />
           <ScalarProperty Name="Position" ColumnName="Position" />
           <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
           <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
-          <ScalarProperty Name="Status1" ColumnName="Status1" />
           <ScalarProperty Name="Note" ColumnName="Note" />
           <ScalarProperty Name="Status" ColumnName="Status" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <FunctionImportMapping FunctionImportName="Check_Login" FunctionName="KimecoModel.Store.Check_Login" />
+    <EntitySetMapping Name="Equipment_Category">
+      <EntityTypeMapping TypeName="KimecoModel.Equipment_Category">
+        <MappingFragment StoreEntitySet="Equipment_Category">
+          <ScalarProperty Name="Note" ColumnName="Note" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Salaries">
+      <EntityTypeMapping TypeName="KimecoModel.Salary">
+        <MappingFragment StoreEntitySet="Salary">
+          <ScalarProperty Name="Sign" ColumnName="Sign" />
+          <ScalarProperty Name="Value" ColumnName="Value" />
+          <ScalarProperty Name="Note" ColumnName="Note" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="TeamID" ColumnName="TeamID" />
+          <ScalarProperty Name="Allowance" ColumnName="Allowance" />
+          <ScalarProperty Name="Advanced" ColumnName="Advanced" />
+          <ScalarProperty Name="UnitPerHour" ColumnName="UnitPerHour" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="WorkingTime" ColumnName="WorkingTime" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CashReports">
+      <EntityTypeMapping TypeName="KimecoModel.CashReport">
+        <MappingFragment StoreEntitySet="CashReport">
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Note" ColumnName="Note" />
+          <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="ProjectTotal" ColumnName="ProjectTotal" />
+          <ScalarProperty Name="CashInHand" ColumnName="CashInHand" />
+          <ScalarProperty Name="BankRemain" ColumnName="BankRemain" />
+          <ScalarProperty Name="SubTotalOutput" ColumnName="SubTotalOutput" />
+          <ScalarProperty Name="SubTotalInput" ColumnName="SubTotalInput" />
+          <ScalarProperty Name="LastMonthRemain" ColumnName="LastMonthRemain" />
+          <ScalarProperty Name="ProjectName" ColumnName="ProjectName" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

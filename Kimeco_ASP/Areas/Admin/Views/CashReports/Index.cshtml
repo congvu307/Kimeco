@@ -1,0 +1,102 @@
+﻿@model IEnumerable<Kimeco_ASP.Models.CashReport>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<div class="widget-box">
+    <div class="widget-title">
+        <span class="icon">
+            <i class="icon-th"></i>
+        </span>
+        <h5>Cash Table</h5>
+    </div>
+    <div class="nopadding">
+        <table class="table data-table table-bordered dataTable">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Date)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ProjectName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.LastMonthRemain)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.SubTotalInput)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.SubTotalOutput)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.BankRemain)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.CashInHand)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ProjectTotal)
+                    </th>
+
+                    <th>
+                        @Html.DisplayNameFor(model => model.Note)
+                    </th>
+
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    if (item.Status == true)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Date)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ProjectName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.LastMonthRemain)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.SubTotalInput)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.SubTotalOutput)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.BankRemain)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.CashInHand)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ProjectTotal)
+                            </td>
+
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Note)
+                            </td>
+
+                            <td>
+                                @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+                                @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+                                @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

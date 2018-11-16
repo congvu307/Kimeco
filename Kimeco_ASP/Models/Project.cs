@@ -14,11 +14,20 @@ namespace Kimeco_ASP.Models
     
     public partial class Project
     {
-        public string ID { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Project()
+        {
+            this.CashReports = new HashSet<CashReport>();
+        }
+    
+        public int ID { get; set; }
         public string Name { get; set; }
         public string Note { get; set; }
         public Nullable<System.DateTime> CreateDate { get; set; }
         public Nullable<int> CreateBy { get; set; }
         public Nullable<bool> Status { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CashReport> CashReports { get; set; }
     }
 }

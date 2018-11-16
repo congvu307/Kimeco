@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Kimeco_ASP.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -9,6 +10,7 @@ namespace Kimeco_ASP.Areas.Admin.Controllers
 {
     public class LoginController : Controller
     {
+        KimecoEntities db = new KimecoEntities();
         // GET: Admin/Login
         [HttpGet]
         public ActionResult Index()
@@ -18,12 +20,21 @@ namespace Kimeco_ASP.Areas.Admin.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Index(string username,string password,bool RememberMe = false)
+        public ActionResult Index(string username, string password, bool RememberMe = false)
         {
             if (Membership.ValidateUser(username, password) && ModelState.IsValid)
             {
                 FormsAuthentication.SetAuthCookie(username, RememberMe);
-                return RedirectToAction("Index", "Home");
+                User user = db.Users.First(x => x.Username == username);
+                if (user != null)
+                {
+                    Response.Cookies["position"].Value = user.Position;
+                    Response.Cookies["position"].Expires = DateTime.Now.AddYears(1);
+                    Response.Cookies["username"].Value = user.Username;
+                    Response.Cookies["username"].Expires = DateTime.Now.AddYears(1);
+                }
+
+                return Redirect("/admin/home");
             }
             else
             {
@@ -34,6 +45,8 @@ namespace Kimeco_ASP.Areas.Admin.Controllers
         public ActionResult Logout()
         {
             FormsAuthentication.SignOut();
+            Response.Cookies["position"].Value = "";
+            Response.Cookies["username"].Value = "";
             return RedirectToAction("Index", "Home");
         }
     }

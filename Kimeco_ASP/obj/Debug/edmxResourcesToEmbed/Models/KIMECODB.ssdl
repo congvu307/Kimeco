@@ -5,9 +5,9 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="_Date" Type="nvarchar" MaxLength="50" />
+    <Property Name="_Date" Type="datetime" Nullable="false" />
     <Property Name="Company" Type="nvarchar" MaxLength="255" />
-    <Property Name="ProjectName" Type="nvarchar" MaxLength="250" />
+    <Property Name="ProjectName" Type="int" />
     <Property Name="Staff" Type="nvarchar" MaxLength="250" />
     <Property Name="_Content" Type="nvarchar(max)" />
     <Property Name="Input" Type="decimal" Precision="18" Scale="0" />
@@ -15,9 +15,27 @@
     <Property Name="Invoice" Type="nvarchar" MaxLength="50" />
     <Property Name="Ref" Type="nvarchar" MaxLength="255" />
     <Property Name="CreateDate" Type="datetime" />
-    <Property Name="CreateBy" Type="int" />
+    <Property Name="CreateBy" Type="nvarchar" MaxLength="50" />
     <Property Name="Status" Type="bit" />
     <Property Name="Note" Type="nvarchar" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="CashReport">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Date" Type="datetime" Nullable="false" />
+    <Property Name="ProjectName" Type="int" />
+    <Property Name="LastMonthRemain" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="SubTotalInput" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="SubTotalOutput" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="BankRemain" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="CashInHand" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="ProjectTotal" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="CreateDate" Type="datetime" />
+    <Property Name="CreateBy" Type="nvarchar" MaxLength="50" />
+    <Property Name="Note" Type="nvarchar" MaxLength="50" />
+    <Property Name="Status" Type="bit" />
   </EntityType>
   <EntityType Name="Cost">
     <Key>
@@ -29,7 +47,7 @@
     <Property Name="UnitPrice" Type="decimal" Precision="18" Scale="0" />
     <Property Name="SubTotal" Type="decimal" Precision="18" Scale="0" />
     <Property Name="Date" Type="datetime" />
-    <Property Name="ProjectID" Type="nvarchar" MaxLength="250" />
+    <Property Name="ProjectID" Type="int" />
     <Property Name="Conpany" Type="nvarchar" MaxLength="255" />
     <Property Name="Tax" Type="decimal" Precision="18" Scale="0" />
     <Property Name="CreateDate" Type="datetime" />
@@ -39,6 +57,17 @@
     <Property Name="Quantity" Type="decimal" Precision="18" Scale="0" />
     <Property Name="VAT" Type="decimal" Precision="18" Scale="0" />
     <Property Name="Total" Type="decimal" Precision="18" Scale="0" />
+  </EntityType>
+  <EntityType Name="Equipment_Category">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="250" />
+    <Property Name="CreateDate" Type="datetime" />
+    <Property Name="CreateBy" Type="int" />
+    <Property Name="Status" Type="bit" />
+    <Property Name="Note" Type="nvarchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="History">
     <Key>
@@ -59,7 +88,7 @@
     <Key>
       <PropertyRef Name="ID" />
     </Key>
-    <Property Name="ID" Type="nvarchar" MaxLength="250" Nullable="false" />
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Name" Type="nvarchar" MaxLength="255" />
     <Property Name="Note" Type="nvarchar" MaxLength="255" />
     <Property Name="CreateDate" Type="datetime" />
@@ -71,44 +100,92 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="UserID" Type="int" />
+    <Property Name="UserID" Type="nvarchar" MaxLength="50" />
     <Property Name="WorkingTime" Type="nvarchar" MaxLength="50" />
     <Property Name="Date" Type="datetime" />
     <Property Name="UnitPerHour" Type="decimal" Precision="18" Scale="0" />
     <Property Name="Advanced" Type="nvarchar" MaxLength="255" />
-    <Property Name="Gasoline" Type="nvarchar" MaxLength="255" />
-    <Property Name="ProjectID" Type="nvarchar" MaxLength="250" />
+    <Property Name="Allowance" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="TeamID" Type="int" />
     <Property Name="CreateDate" Type="datetime" />
     <Property Name="CreateBy" Type="int" />
-    <Property Name="Status" Type="bit" />
+    <Property Name="Status" Type="nvarchar" MaxLength="50" />
     <Property Name="Note" Type="nvarchar" MaxLength="255" />
+    <Property Name="Value" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="Sign" Type="nvarchar" MaxLength="255" />
   </EntityType>
-  <EntityType Name="User">
+  <EntityType Name="Team">
     <Key>
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Username" Type="nvarchar" MaxLength="50" />
+    <Property Name="Name" Type="nvarchar" MaxLength="250" />
+    <Property Name="ProjectID" Type="int" />
+    <Property Name="CreateDate" Type="datetime" />
+    <Property Name="CreateBy" Type="nvarchar" MaxLength="50" />
+    <Property Name="Status" Type="nvarchar" MaxLength="50" />
+    <Property Name="Note" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="Username" />
+    </Key>
+    <Property Name="Username" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="Password" Type="nvarchar" MaxLength="50" />
+    <Property Name="FullName" Type="nvarchar" MaxLength="250" />
     <Property Name="Email" Type="nvarchar" MaxLength="50" />
     <Property Name="Phone" Type="nvarchar" MaxLength="50" />
     <Property Name="Position" Type="nvarchar" MaxLength="50" />
     <Property Name="CreateDate" Type="datetime" />
     <Property Name="CreateBy" Type="int" />
-    <Property Name="Status1" Type="bit" />
     <Property Name="Note" Type="nvarchar" MaxLength="255" />
     <Property Name="Status" Type="nchar" MaxLength="10" />
   </EntityType>
+  <Association Name="FK_CashReport_Project">
+    <End Role="Project" Type="Self.Project" Multiplicity="0..1" />
+    <End Role="CashReport" Type="Self.CashReport" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Project">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CashReport">
+        <PropertyRef Name="ProjectName" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Salary_User">
+    <End Role="User" Type="Self.User" Multiplicity="0..1" />
+    <End Role="Salary" Type="Self.Salary" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Username" />
+      </Principal>
+      <Dependent Role="Salary">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Function Name="Check_Login" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="Username" Type="nvarchar" Mode="In" />
     <Parameter Name="Password" Type="nvarchar" Mode="In" />
   </Function>
   <EntityContainer Name="KimecoModelStoreContainer">
     <EntitySet Name="Cash" EntityType="Self.Cash" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CashReport" EntityType="Self.CashReport" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Cost" EntityType="Self.Cost" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Equipment_Category" EntityType="Self.Equipment_Category" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="History" EntityType="Self.History" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Project" EntityType="Self.Project" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Salary" EntityType="Self.Salary" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Team" EntityType="Self.Team" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_CashReport_Project" Association="Self.FK_CashReport_Project">
+      <End Role="Project" EntitySet="Project" />
+      <End Role="CashReport" EntitySet="CashReport" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Salary_User" Association="Self.FK_Salary_User">
+      <End Role="User" EntitySet="User" />
+      <End Role="Salary" EntitySet="Salary" />
+    </AssociationSet>
   </EntityContainer>
 </Schema>

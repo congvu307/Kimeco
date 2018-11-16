@@ -193,3 +193,4 @@ C:\Users\DELL\Documents\GitHub\Kimeco\Kimeco_ASP\bin\NPOI.OOXML.dll
 C:\Users\DELL\Documents\GitHub\Kimeco\Kimeco_ASP\bin\NPOI.OpenXml4Net.dll
 C:\Users\DELL\Documents\GitHub\Kimeco\Kimeco_ASP\bin\NPOI.OpenXmlFormats.dll
 C:\Users\DELL\Documents\GitHub\Kimeco\Kimeco_ASP\bin\NPOI.xml
+C:\Users\DELL\Documents\GitHub\Kimeco\Kimeco_ASP\obj\Debug\Kimeco_ASP.csprojAssemblyReference.cache
