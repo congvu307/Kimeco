@@ -61,7 +61,7 @@
     <Property Name="Unit" Type="nvarchar" MaxLength="50" />
     <Property Name="UnitPrice" Type="decimal" Precision="18" Scale="0" />
     <Property Name="SubTotal" Type="decimal" Precision="18" Scale="0" />
-    <Property Name="Date" Type="datetime" />
+    <Property Name="Date" Type="datetime" Nullable="false" />
     <Property Name="ConpanyID" Type="int" />
     <Property Name="Tax" Type="decimal" Precision="18" Scale="0" />
     <Property Name="CreateDate" Type="datetime" />
@@ -155,6 +155,18 @@
     <Property Name="Note" Type="nvarchar" MaxLength="255" />
     <Property Name="Status" Type="nchar" MaxLength="10" />
   </EntityType>
+  <Association Name="FK_Cash_Project">
+    <End Role="Project" Type="Self.Project" Multiplicity="0..1" />
+    <End Role="Cash" Type="Self.Cash" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Project">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Cash">
+        <PropertyRef Name="ProjectName" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_CashReport_Project">
     <End Role="Project" Type="Self.Project" Multiplicity="0..1" />
     <End Role="CashReport" Type="Self.CashReport" Multiplicity="*" />
@@ -218,6 +230,10 @@
     <EntitySet Name="Salary" EntityType="Self.Salary" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Team" EntityType="Self.Team" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Cash_Project" Association="Self.FK_Cash_Project">
+      <End Role="Project" EntitySet="Project" />
+      <End Role="Cash" EntitySet="Cash" />
+    </AssociationSet>
     <AssociationSet Name="FK_CashReport_Project" Association="Self.FK_CashReport_Project">
       <End Role="Project" EntitySet="Project" />
       <End Role="CashReport" EntitySet="CashReport" />

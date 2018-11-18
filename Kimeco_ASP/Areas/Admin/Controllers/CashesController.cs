@@ -166,6 +166,8 @@ namespace Kimeco_ASP.Areas.Admin.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.Date = cash.C_Date.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture);
+            ViewData["listProject"] = db.Projects.Where(x => x.Status == true && x.Note != "Disable").ToList();
             return View(cash);
         }
 
@@ -175,10 +177,12 @@ namespace Kimeco_ASP.Areas.Admin.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Admin")]
-        public ActionResult Edit([Bind(Include = "ID,C_Date,Company,ProjectName,Staff,C_Content,Input,Output,Invoice,Ref,CreateDate,CreateBy,Status,Note")] Cash cash)
+        public ActionResult Edit([Bind(Include = "ID,C_Date,Company,ProjectName,Staff,C_Content,Input,Output,Invoice,Ref,CreateDate,CreateBy,Status,Note")] Cash cash,string stringDay)
         {
             if (ModelState.IsValid)
             {
+                cash.C_Date = DateTime.ParseExact(stringDay, "d/M/yyyy", CultureInfo.InvariantCulture);
+                cash.CreateDate = DateTime.Now;
                 db.Entry(cash).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -216,7 +220,7 @@ namespace Kimeco_ASP.Areas.Admin.Controllers
         public FileResult Download_Template()
         {
             var filename = "InputCash_Template.xlsx";
-            string fileDir = System.IO.Path.Combine(Server.MapPath("~/App_Data/uploads"), filename);
+            string fileDir = System.IO.Path.Combine(Server.MapPath("~/App_Data/templates"), filename);
             return File(fileDir, System.Net.Mime.MediaTypeNames.Application.Octet, filename);
         }
         protected override void Dispose(bool disposing)

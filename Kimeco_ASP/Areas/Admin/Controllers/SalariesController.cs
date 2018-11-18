@@ -341,6 +341,8 @@ namespace Kimeco_ASP.Areas.Admin.Controllers
         // GET: Admin/Salaries/Create
         public ActionResult Create()
         {
+            ViewData["ListTeam"] = db.Teams.ToList();
+            ViewData["ListUser"] = db.Users.ToList();
             return View();
         }
 
@@ -350,10 +352,11 @@ namespace Kimeco_ASP.Areas.Admin.Controllers
         [HttpPost]
         [Authorize]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,UserID,WorkingTime,Date,UnitPerHour,Advanced,Allowance,TeamID,CreateDate,CreateBy,Status,Note,Value,Sign")] Salary salary)
+        public ActionResult Create([Bind(Include = "ID,UserID,WorkingTime,Date,UnitPerHour,Advanced,Allowance,TeamID,CreateDate,CreateBy,Status,Note,Value,Sign")] Salary salary,string stringDay)
         {
             if (ModelState.IsValid)
             {
+                salary.Date = DateTime.ParseExact(stringDay, "d/M/yyyy", CultureInfo.InvariantCulture);
                 salary.Status = "spending";
                 db.Salaries.Add(salary);
                 db.SaveChanges();
@@ -376,6 +379,8 @@ namespace Kimeco_ASP.Areas.Admin.Controllers
             {
                 return HttpNotFound();
             }
+            ViewData["ListTeam"] = db.Teams.ToList();
+            ViewData["ListUser"] = db.Users.ToList();
             return View(salary);
         }
 

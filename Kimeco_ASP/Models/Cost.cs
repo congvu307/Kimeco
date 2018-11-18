@@ -19,7 +19,7 @@ namespace Kimeco_ASP.Models
         public string Unit { get; set; }
         public Nullable<decimal> UnitPrice { get; set; }
         public Nullable<decimal> SubTotal { get; set; }
-        public Nullable<System.DateTime> Date { get; set; }
+        public System.DateTime Date { get; set; }
         public Nullable<int> ConpanyID { get; set; }
         public Nullable<decimal> Tax { get; set; }
         public Nullable<System.DateTime> CreateDate { get; set; }

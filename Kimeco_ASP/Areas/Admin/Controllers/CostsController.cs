@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -49,6 +50,7 @@ namespace Kimeco_ASP.Areas.Admin.Controllers
         [Authorize]
         public ActionResult Create()
         {
+            ViewData["ListCompany"] = db.Companies.ToList();
             return View();
         }
 
@@ -58,10 +60,11 @@ namespace Kimeco_ASP.Areas.Admin.Controllers
         [HttpPost]
         [Authorize]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,Item,Unit,UnitPrice,SubTotal,Date,ProjectID,Conpany,Tax,CreateDate,CreateBy,Status,Note,Quantity,VAT,Total")] Cost cost)
+        public ActionResult Create([Bind(Include = "ID,Item,Unit,UnitPrice,SubTotal,Date,CompanyID,Tax,CreateDate,CreateBy,Status,Note,Quantity,VAT,Total")] Cost cost,string stringDay)
         {
             if (ModelState.IsValid)
             {
+                cost.Date = DateTime.ParseExact(stringDay, "d/M/yyyy", CultureInfo.InvariantCulture);
                 db.Costs.Add(cost);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -83,6 +86,8 @@ namespace Kimeco_ASP.Areas.Admin.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.Date = cost.Date.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture);
+            ViewData["ListCompany"] = db.Companies.ToList();
             return View(cost);
         }
 
@@ -92,10 +97,11 @@ namespace Kimeco_ASP.Areas.Admin.Controllers
         [HttpPost]
         [Authorize]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,Item,Unit,UnitPrice,SubTotal,Date,ProjectID,Conpany,Tax,CreateDate,CreateBy,Status,Note,Quantity,VAT,Total")] Cost cost)
+        public ActionResult Edit([Bind(Include = "ID,Item,Unit,UnitPrice,SubTotal,Date,CompanyID,Tax,CreateDate,CreateBy,Status,Note,Quantity,VAT,Total")] Cost cost,string stringDay)
         {
             if (ModelState.IsValid)
             {
+                cost.Date = DateTime.ParseExact(stringDay, "d/M/yyyy", CultureInfo.InvariantCulture);
                 db.Entry(cost).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");

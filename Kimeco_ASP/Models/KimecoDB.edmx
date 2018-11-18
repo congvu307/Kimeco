@@ -66,7 +66,7 @@
           <Property Name="Unit" Type="nvarchar" MaxLength="50" />
           <Property Name="UnitPrice" Type="decimal" Precision="18" Scale="0" />
           <Property Name="SubTotal" Type="decimal" Precision="18" Scale="0" />
-          <Property Name="Date" Type="datetime" />
+          <Property Name="Date" Type="datetime" Nullable="false" />
           <Property Name="ConpanyID" Type="int" />
           <Property Name="Tax" Type="decimal" Precision="18" Scale="0" />
           <Property Name="CreateDate" Type="datetime" />
@@ -160,6 +160,18 @@
           <Property Name="Note" Type="nvarchar" MaxLength="255" />
           <Property Name="Status" Type="nchar" MaxLength="10" />
         </EntityType>
+        <Association Name="FK_Cash_Project">
+          <End Role="Project" Type="Self.Project" Multiplicity="0..1" />
+          <End Role="Cash" Type="Self.Cash" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Project">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Cash">
+              <PropertyRef Name="ProjectName" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_CashReport_Project">
           <End Role="Project" Type="Self.Project" Multiplicity="0..1" />
           <End Role="CashReport" Type="Self.CashReport" Multiplicity="*" />
@@ -223,6 +235,10 @@
           <EntitySet Name="Salary" EntityType="Self.Salary" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Team" EntityType="Self.Team" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Cash_Project" Association="Self.FK_Cash_Project">
+            <End Role="Project" EntitySet="Project" />
+            <End Role="Cash" EntitySet="Cash" />
+          </AssociationSet>
           <AssociationSet Name="FK_CashReport_Project" Association="Self.FK_CashReport_Project">
             <End Role="Project" EntitySet="Project" />
             <End Role="CashReport" EntitySet="CashReport" />
@@ -244,25 +260,6 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="KimecoModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="Cash">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="C_Date" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="Company" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="ProjectName" Type="Int32" />
-          <Property Name="Staff" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="C_Content" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Input" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="Output" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="Invoice" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Ref" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="CreateDate" Type="DateTime" Precision="3" />
-          <Property Name="CreateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Status" Type="Boolean" />
-          <Property Name="Note" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-        </EntityType>
         <EntityType Name="History">
           <Key>
             <PropertyRef Name="ID" />
@@ -290,6 +287,7 @@
           <Property Name="Status" Type="Boolean" />
           <NavigationProperty Name="CashReports" Relationship="KimecoModel.FK_CashReport_Project" FromRole="Project" ToRole="CashReport" />
           <NavigationProperty Name="Companies" Relationship="KimecoModel.FK_Company_Project" FromRole="Project" ToRole="Company" />
+          <NavigationProperty Name="Cashes" Relationship="KimecoModel.FK_Cash_Project" FromRole="Project" ToRole="Cash" />
         </EntityType>
         <EntityType Name="Team">
           <Key>
@@ -320,7 +318,6 @@
           <NavigationProperty Name="Salaries" Relationship="KimecoModel.FK_Salary_User" FromRole="User" ToRole="Salary" />
         </EntityType>
         <EntityContainer Name="KimecoEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Cashes" EntityType="Self.Cash" />
           <EntitySet Name="Histories" EntityType="Self.History" />
           <EntitySet Name="Projects" EntityType="Self.Project" />
           <EntitySet Name="Teams" EntityType="Self.Team" />
@@ -336,19 +333,24 @@
             <End Role="CashReport" EntitySet="CashReports" />
           </AssociationSet>
           <EntitySet Name="Companies" EntityType="KimecoModel.Company" />
-          <EntitySet Name="Costs" EntityType="KimecoModel.Cost" />
           <AssociationSet Name="FK_Company_Project" Association="KimecoModel.FK_Company_Project">
             <End Role="Project" EntitySet="Projects" />
             <End Role="Company" EntitySet="Companies" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Cost_Company" Association="KimecoModel.FK_Cost_Company">
-            <End Role="Company" EntitySet="Companies" />
-            <End Role="Cost" EntitySet="Costs" />
           </AssociationSet>
           <EntitySet Name="Salaries" EntityType="KimecoModel.Salary" />
           <AssociationSet Name="FK_Salary_User" Association="KimecoModel.FK_Salary_User">
             <End Role="User" EntitySet="Users" />
             <End Role="Salary" EntitySet="Salaries" />
+          </AssociationSet>
+          <EntitySet Name="Cashes" EntityType="KimecoModel.Cash" />
+          <AssociationSet Name="FK_Cash_Project" Association="KimecoModel.FK_Cash_Project">
+            <End Role="Project" EntitySet="Projects" />
+            <End Role="Cash" EntitySet="Cashes" />
+          </AssociationSet>
+          <EntitySet Name="Costs" EntityType="KimecoModel.Cost" />
+          <AssociationSet Name="FK_Cost_Company" Association="KimecoModel.FK_Cost_Company">
+            <End Role="Company" EntitySet="Companies" />
+            <End Role="Cost" EntitySet="Costs" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="Equipment_Category">
@@ -410,27 +412,6 @@
           <NavigationProperty Name="Project" Relationship="KimecoModel.FK_Company_Project" FromRole="Company" ToRole="Project" />
           <NavigationProperty Name="Costs" Relationship="KimecoModel.FK_Cost_Company" FromRole="Company" ToRole="Cost" />
         </EntityType>
-        <EntityType Name="Cost">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Item" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="Unit" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="UnitPrice" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="SubTotal" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="Date" Type="DateTime" Precision="3" />
-          <Property Name="ConpanyID" Type="Int32" />
-          <Property Name="Tax" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="CreateDate" Type="DateTime" Precision="3" />
-          <Property Name="CreateBy" Type="Int32" />
-          <Property Name="Status" Type="Boolean" />
-          <Property Name="Note" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="Quantity" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="VAT" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="Total" Type="Decimal" Precision="18" Scale="0" />
-          <NavigationProperty Name="Company" Relationship="KimecoModel.FK_Cost_Company" FromRole="Cost" ToRole="Company" />
-        </EntityType>
         <Association Name="FK_Company_Project">
           <End Type="KimecoModel.Project" Role="Project" Multiplicity="0..1" />
           <End Type="KimecoModel.Company" Role="Company" Multiplicity="*" />
@@ -440,18 +421,6 @@
             </Principal>
             <Dependent Role="Company">
               <PropertyRef Name="ProjectID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Cost_Company">
-          <End Type="KimecoModel.Company" Role="Company" Multiplicity="0..1" />
-          <End Type="KimecoModel.Cost" Role="Cost" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Company">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="Cost">
-              <PropertyRef Name="ConpanyID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -487,32 +456,77 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Cash">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="C_Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Company" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="ProjectName" Type="Int32" />
+          <Property Name="Staff" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="C_Content" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Input" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Output" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Invoice" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Ref" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CreateDate" Type="DateTime" Precision="3" />
+          <Property Name="CreateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="Boolean" />
+          <Property Name="Note" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Project" Relationship="KimecoModel.FK_Cash_Project" FromRole="Cash" ToRole="Project" />
+        </EntityType>
+        <Association Name="FK_Cash_Project">
+          <End Type="KimecoModel.Project" Role="Project" Multiplicity="0..1" />
+          <End Type="KimecoModel.Cash" Role="Cash" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Project">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Cash">
+              <PropertyRef Name="ProjectName" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Cost">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Item" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Unit" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UnitPrice" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="SubTotal" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ConpanyID" Type="Int32" />
+          <Property Name="Tax" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="CreateDate" Type="DateTime" Precision="3" />
+          <Property Name="CreateBy" Type="Int32" />
+          <Property Name="Status" Type="Boolean" />
+          <Property Name="Note" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Quantity" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="VAT" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Total" Type="Decimal" Precision="18" Scale="0" />
+          <NavigationProperty Name="Company" Relationship="KimecoModel.FK_Cost_Company" FromRole="Cost" ToRole="Company" />
+        </EntityType>
+        <Association Name="FK_Cost_Company">
+          <End Type="KimecoModel.Company" Role="Company" Multiplicity="0..1" />
+          <End Type="KimecoModel.Cost" Role="Cost" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Cost">
+              <PropertyRef Name="ConpanyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="KimecoModelStoreContainer" CdmEntityContainer="KimecoEntities">
-          <EntitySetMapping Name="Cashes">
-            <EntityTypeMapping TypeName="KimecoModel.Cash">
-              <MappingFragment StoreEntitySet="Cash">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="C_Date" ColumnName="_Date" />
-                <ScalarProperty Name="Company" ColumnName="Company" />
-                <ScalarProperty Name="ProjectName" ColumnName="ProjectName" />
-                <ScalarProperty Name="Staff" ColumnName="Staff" />
-                <ScalarProperty Name="C_Content" ColumnName="_Content" />
-                <ScalarProperty Name="Input" ColumnName="Input" />
-                <ScalarProperty Name="Output" ColumnName="Output" />
-                <ScalarProperty Name="Invoice" ColumnName="Invoice" />
-                <ScalarProperty Name="Ref" ColumnName="Ref" />
-                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
-                <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="Note" ColumnName="Note" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Histories">
             <EntityTypeMapping TypeName="KimecoModel.History">
               <MappingFragment StoreEntitySet="History">
@@ -618,6 +632,46 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Salaries">
+            <EntityTypeMapping TypeName="KimecoModel.Salary">
+              <MappingFragment StoreEntitySet="Salary">
+                <ScalarProperty Name="Sign" ColumnName="Sign" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+                <ScalarProperty Name="Note" ColumnName="Note" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="TeamID" ColumnName="TeamID" />
+                <ScalarProperty Name="Allowance" ColumnName="Allowance" />
+                <ScalarProperty Name="Advanced" ColumnName="Advanced" />
+                <ScalarProperty Name="UnitPerHour" ColumnName="UnitPerHour" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="WorkingTime" ColumnName="WorkingTime" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cashes">
+            <EntityTypeMapping TypeName="KimecoModel.Cash">
+              <MappingFragment StoreEntitySet="Cash">
+                <ScalarProperty Name="Note" ColumnName="Note" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="Ref" ColumnName="Ref" />
+                <ScalarProperty Name="Invoice" ColumnName="Invoice" />
+                <ScalarProperty Name="Output" ColumnName="Output" />
+                <ScalarProperty Name="Input" ColumnName="Input" />
+                <ScalarProperty Name="C_Content" ColumnName="_Content" />
+                <ScalarProperty Name="Staff" ColumnName="Staff" />
+                <ScalarProperty Name="ProjectName" ColumnName="ProjectName" />
+                <ScalarProperty Name="Company" ColumnName="Company" />
+                <ScalarProperty Name="C_Date" ColumnName="_Date" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Costs">
             <EntityTypeMapping TypeName="KimecoModel.Cost">
               <MappingFragment StoreEntitySet="Cost">
@@ -635,26 +689,6 @@
                 <ScalarProperty Name="UnitPrice" ColumnName="UnitPrice" />
                 <ScalarProperty Name="Unit" ColumnName="Unit" />
                 <ScalarProperty Name="Item" ColumnName="Item" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Salaries">
-            <EntityTypeMapping TypeName="KimecoModel.Salary">
-              <MappingFragment StoreEntitySet="Salary">
-                <ScalarProperty Name="Sign" ColumnName="Sign" />
-                <ScalarProperty Name="Value" ColumnName="Value" />
-                <ScalarProperty Name="Note" ColumnName="Note" />
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
-                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
-                <ScalarProperty Name="TeamID" ColumnName="TeamID" />
-                <ScalarProperty Name="Allowance" ColumnName="Allowance" />
-                <ScalarProperty Name="Advanced" ColumnName="Advanced" />
-                <ScalarProperty Name="UnitPerHour" ColumnName="UnitPerHour" />
-                <ScalarProperty Name="Date" ColumnName="Date" />
-                <ScalarProperty Name="WorkingTime" ColumnName="WorkingTime" />
-                <ScalarProperty Name="UserID" ColumnName="UserID" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>

@@ -28,5 +28,7 @@ namespace Kimeco_ASP.Models
         public string CreateBy { get; set; }
         public Nullable<bool> Status { get; set; }
         public string Note { get; set; }
+    
+        public virtual Project Project { get; set; }
     }
 }

@@ -27,7 +27,6 @@ namespace Kimeco_ASP.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Cash> Cashes { get; set; }
         public virtual DbSet<History> Histories { get; set; }
         public virtual DbSet<Project> Projects { get; set; }
         public virtual DbSet<Team> Teams { get; set; }
@@ -35,8 +34,9 @@ namespace Kimeco_ASP.Models
         public virtual DbSet<Equipment_Category> Equipment_Category { get; set; }
         public virtual DbSet<CashReport> CashReports { get; set; }
         public virtual DbSet<Company> Companies { get; set; }
-        public virtual DbSet<Cost> Costs { get; set; }
         public virtual DbSet<Salary> Salaries { get; set; }
+        public virtual DbSet<Cash> Cashes { get; set; }
+        public virtual DbSet<Cost> Costs { get; set; }
     
         public virtual ObjectResult<Nullable<bool>> Check_Login(string username, string password)
         {

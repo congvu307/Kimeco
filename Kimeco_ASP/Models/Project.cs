@@ -19,6 +19,7 @@ namespace Kimeco_ASP.Models
         {
             this.CashReports = new HashSet<CashReport>();
             this.Companies = new HashSet<Company>();
+            this.Cashes = new HashSet<Cash>();
         }
     
         public int ID { get; set; }
@@ -32,5 +33,7 @@ namespace Kimeco_ASP.Models
         public virtual ICollection<CashReport> CashReports { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Company> Companies { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Cash> Cashes { get; set; }
     }
 }
