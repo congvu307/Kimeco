@@ -12,25 +12,27 @@ namespace Kimeco_ASP.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Project
+    public partial class Company
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Project()
+        public Company()
         {
-            this.CashReports = new HashSet<CashReport>();
-            this.Companies = new HashSet<Company>();
+            this.Costs = new HashSet<Cost>();
         }
     
         public int ID { get; set; }
         public string Name { get; set; }
+        public string Address { get; set; }
+        public string Phone { get; set; }
+        public Nullable<int> ProjectID { get; set; }
+        public string Email { get; set; }
         public string Note { get; set; }
         public Nullable<System.DateTime> CreateDate { get; set; }
         public Nullable<int> CreateBy { get; set; }
         public Nullable<bool> Status { get; set; }
     
+        public virtual Project Project { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CashReport> CashReports { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Company> Companies { get; set; }
+        public virtual ICollection<Cost> Costs { get; set; }
     }
 }

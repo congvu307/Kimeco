@@ -201,7 +201,7 @@ namespace Kimeco_ASP.Areas.Admin.Controllers
                     {
                         string _fileNameToSave = Path.Combine(Server.MapPath("~/App_Data/uploads"), _FileName);
                         file.SaveAs(_fileNameToSave);
-                        var listProject = db.Projects.ToList();
+                        var listCompany = db.Companies.ToList();
                         //đọc file upload
                         FileStream fsIndex = new FileStream(_fileNameToSave, FileMode.Open);
                         XSSFWorkbook wbIndex = new XSSFWorkbook(fsIndex);
@@ -237,11 +237,10 @@ namespace Kimeco_ASP.Areas.Admin.Controllers
                                 ViewBag.Message = "Lỗi ở dòng " + i.ToString();
                                 return View();
                             }
-                            cost.Conpany = rowNow.GetCell(1, MissingCellPolicy.CREATE_NULL_AS_BLANK).ToString();
-                            var projectName = rowNow.GetCell(2, MissingCellPolicy.CREATE_NULL_AS_BLANK).ToString().Trim();
-                            if (listProject.Any(x => x.Name == projectName))
+                            var CompanyName = rowNow.GetCell(2, MissingCellPolicy.CREATE_NULL_AS_BLANK).ToString().Trim();
+                            if (listCompany.Any(x => x.Name == CompanyName))
                             {
-                                cost.ProjectID = listProject.FirstOrDefault(x => x.Name == projectName).ID;
+                                cost.ConpanyID = listCompany.FirstOrDefault(x => x.Name == CompanyName).ID;
                             }
                             else
                             {

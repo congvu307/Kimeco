@@ -49,9 +49,6 @@
                         @Html.DisplayNameFor(model => model.UnitPerHour)
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.Advanced)
-                    </th>
-                    <th>
                         @Html.DisplayNameFor(model => model.Allowance)
                     </th>
                     <th>
@@ -59,12 +56,6 @@
                     </th>
                     <th>
                         @Html.DisplayNameFor(model => model.CreateDate)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.CreateBy)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Status)
                     </th>
                     <th>
                         @Html.DisplayNameFor(model => model.Note)
@@ -84,7 +75,7 @@
                 {
                     <tr>
                         <td>
-                            @Html.DisplayFor(modelItem => item.UserID)
+                            @Html.DisplayFor(modelItem => item.User.FullName)
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.WorkingTime)
@@ -96,9 +87,6 @@
                             @Html.DisplayFor(modelItem => item.UnitPerHour)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.Advanced)
-                        </td>
-                        <td>
                             @Html.DisplayFor(modelItem => item.Allowance)
                         </td>
                         <td>
@@ -106,12 +94,6 @@
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.CreateDate)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.CreateBy)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Status)
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.Note)

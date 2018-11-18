@@ -20,8 +20,7 @@ namespace Kimeco_ASP.Models
         public Nullable<decimal> UnitPrice { get; set; }
         public Nullable<decimal> SubTotal { get; set; }
         public Nullable<System.DateTime> Date { get; set; }
-        public Nullable<int> ProjectID { get; set; }
-        public string Conpany { get; set; }
+        public Nullable<int> ConpanyID { get; set; }
         public Nullable<decimal> Tax { get; set; }
         public Nullable<System.DateTime> CreateDate { get; set; }
         public Nullable<int> CreateBy { get; set; }
@@ -30,5 +29,7 @@ namespace Kimeco_ASP.Models
         public Nullable<decimal> Quantity { get; set; }
         public Nullable<decimal> VAT { get; set; }
         public Nullable<decimal> Total { get; set; }
+    
+        public virtual Company Company { get; set; }
     }
 }

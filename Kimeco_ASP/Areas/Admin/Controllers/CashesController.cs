@@ -15,7 +15,7 @@ namespace Kimeco_ASP.Areas.Admin.Controllers
     {
         private KimecoEntities db = new KimecoEntities();
         // GET: Admin/Cashes
-        [Authorize]
+        [Authorize(Roles ="Admin")]
         [HttpGet]
         public ActionResult Spending()
         {
@@ -124,6 +124,7 @@ namespace Kimeco_ASP.Areas.Admin.Controllers
         [Authorize]
         public ActionResult Create()
         {
+            ViewData["listproject"] = db.Projects.ToList();
             return View();
         }
 
@@ -133,10 +134,11 @@ namespace Kimeco_ASP.Areas.Admin.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize]
-        public ActionResult Create([Bind(Include = "ID,C_Date,Company,ProjectName,Staff,C_Content,Input,Output,Invoice,Ref,CreateDate,CreateBy,Status,Note")] Cash cash)
+        public ActionResult Create([Bind(Include = "ID,C_Date,Company,ProjectName,Staff,C_Content,Input,Output,Invoice,Ref,CreateDate,CreateBy,Status,Note")] Cash cash,string stringDay)
         {
             if (ModelState.IsValid)
             {
+                cash.C_Date = DateTime.ParseExact(stringDay, "d/M/yyyy", CultureInfo.InvariantCulture);
                 cash.CreateDate = DateTime.Now;
                 cash.Status = false;
                 if (Request.Cookies["username"] != null)
@@ -148,7 +150,7 @@ namespace Kimeco_ASP.Areas.Admin.Controllers
                 return RedirectToAction("Index");
             }
 
-            return View(cash);
+            return RedirectToAction("Index","Cashes");
         }
 
         // GET: Admin/Cashes/Edit/5
@@ -211,7 +213,12 @@ namespace Kimeco_ASP.Areas.Admin.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
-
+        public FileResult Download_Template()
+        {
+            var filename = "InputCash_Template.xlsx";
+            string fileDir = System.IO.Path.Combine(Server.MapPath("~/App_Data/uploads"), filename);
+            return File(fileDir, System.Net.Mime.MediaTypeNames.Application.Octet, filename);
+        }
         protected override void Dispose(bool disposing)
         {
             if (disposing)

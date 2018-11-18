@@ -21,6 +21,7 @@ namespace Kimeco_ASP.Areas.Admin.Controllers
         }
 
         // GET: Admin/Users/Details/5
+        [Authorize(Roles = "Admin")]
         public ActionResult Details(string id)
         {
             if (id == null)
@@ -36,6 +37,7 @@ namespace Kimeco_ASP.Areas.Admin.Controllers
         }
 
         // GET: Admin/Users/Create
+        [Authorize(Roles = "Admin")]
         public ActionResult Create()
         {
             return View();
@@ -45,6 +47,7 @@ namespace Kimeco_ASP.Areas.Admin.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Username,Password,FullName,Email,Phone,Position,CreateDate,CreateBy,Note,Status")] User user)
         {
@@ -59,6 +62,7 @@ namespace Kimeco_ASP.Areas.Admin.Controllers
         }
 
         // GET: Admin/Users/Edit/5
+        [Authorize(Roles = "Admin")]
         public ActionResult Edit(string id)
         {
             if (id == null)
@@ -78,6 +82,7 @@ namespace Kimeco_ASP.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public ActionResult Edit([Bind(Include = "Username,Password,FullName,Email,Phone,Position,CreateDate,CreateBy,Note,Status")] User user)
         {
             if (ModelState.IsValid)
@@ -90,6 +95,7 @@ namespace Kimeco_ASP.Areas.Admin.Controllers
         }
 
         // GET: Admin/Users/Delete/5
+        [Authorize(Roles = "Admin")]
         public ActionResult Delete(string id)
         {
             if (id == null)
@@ -107,6 +113,7 @@ namespace Kimeco_ASP.Areas.Admin.Controllers
         // POST: Admin/Users/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public ActionResult DeleteConfirmed(string id)
         {
             User user = db.Users.Find(id);

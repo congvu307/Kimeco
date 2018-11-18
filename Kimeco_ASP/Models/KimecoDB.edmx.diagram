@@ -5,17 +5,20 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="1ec19066f0aa472196decea97896bf9b" Name="Diagram1" ZoomLevel="74">
-        <EntityTypeShape EntityType="KimecoModel.Cash" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="KimecoModel.Cost" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KimecoModel.Cash" Width="1.5" PointX="1.375" PointY="1.125" IsExpanded="true" />
         <EntityTypeShape EntityType="KimecoModel.History" Width="1.5" PointX="0.75" PointY="5.75" IsExpanded="true" />
         <EntityTypeShape EntityType="KimecoModel.Project" Width="1.5" PointX="2.75" PointY="5.75" IsExpanded="true" />
         <EntityTypeShape EntityType="KimecoModel.Team" Width="1.5" PointX="6.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="KimecoModel.User" Width="1.5" PointX="6.75" PointY="4.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="KimecoModel.Equipment_Category" Width="1.5" PointX="5.25" PointY="8.625" />
-        <EntityTypeShape EntityType="KimecoModel.Salary" Width="1.5" PointX="9" PointY="4.375" />
-        <AssociationConnector Association="KimecoModel.FK_Salary_User" />
+        <EntityTypeShape EntityType="KimecoModel.Equipment_Category" Width="1.5" PointX="9.875" PointY="9.125" />
         <EntityTypeShape EntityType="KimecoModel.CashReport" Width="1.5" PointX="0.625" PointY="9.625" />
         <AssociationConnector Association="KimecoModel.FK_CashReport_Project" />
+        <EntityTypeShape EntityType="KimecoModel.Company" Width="1.5" PointX="5" PointY="8.75" />
+        <EntityTypeShape EntityType="KimecoModel.Cost" Width="1.5" PointX="7.375" PointY="8.875" />
+        <AssociationConnector Association="KimecoModel.FK_Company_Project" />
+        <AssociationConnector Association="KimecoModel.FK_Cost_Company" />
+        <EntityTypeShape EntityType="KimecoModel.Salary" Width="1.5" PointX="9" PointY="3.375" />
+        <AssociationConnector Association="KimecoModel.FK_Salary_User" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

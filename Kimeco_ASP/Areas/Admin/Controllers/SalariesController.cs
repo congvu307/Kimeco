@@ -154,12 +154,12 @@ namespace Kimeco_ASP.Areas.Admin.Controllers
                                     Salary salaryM = new Salary();
                                     salaryM.WorkingTime = "M";
                                     salaryM.Status = "spending";
-                                    salaryM.Value = HomeController.ConvertDecimal(rowM.GetCell(j));
+                                    salaryM.Value = HomeController.ConvertDecimal(rowM.GetCell(j))??0;
                                     salaryM.UserID = User.Username;
                                     salaryM.TeamID = TeamID;
                                     var stringDay = (j - 3).ToString() + "/" + Mounth.ToString() + "/" + Year.ToString();
                                     salaryM.Date = DateTime.ParseExact(stringDay, "d/M/yyyy", CultureInfo.InvariantCulture);
-                                    salaryM.UnitPerHour = UnitPerHour;
+                                    salaryM.UnitPerHour = UnitPerHour??0;
                                     salaryM.Allowance = allow;
                                     db.Salaries.Add(salaryM);
                                 }
@@ -169,12 +169,12 @@ namespace Kimeco_ASP.Areas.Admin.Controllers
                                     Salary salaryM = new Salary();
                                     salaryM.WorkingTime = "A";
                                     salaryM.Status = "spending";
-                                    salaryM.Value = HomeController.ConvertDecimal(rowA.GetCell(j));
+                                    salaryM.Value = HomeController.ConvertDecimal(rowA.GetCell(j))??0;
                                     salaryM.UserID = User.Username;
                                     salaryM.TeamID = TeamID;
                                     var stringDay = (j - 3).ToString() + "/" + Mounth.ToString() + "/" + Year.ToString();
                                     salaryM.Date = DateTime.ParseExact(stringDay, "d/M/yyyy", CultureInfo.InvariantCulture);
-                                    salaryM.UnitPerHour = UnitPerHour;
+                                    salaryM.UnitPerHour = UnitPerHour??0;
                                     salaryM.Allowance = allow;
                                     db.Salaries.Add(salaryM);
                                 }
@@ -184,12 +184,12 @@ namespace Kimeco_ASP.Areas.Admin.Controllers
                                     Salary salaryM = new Salary();
                                     salaryM.WorkingTime = "OT";
                                     salaryM.Status = "spending";
-                                    salaryM.Value = HomeController.ConvertDecimal(rowOT.GetCell(j));
+                                    salaryM.Value = HomeController.ConvertDecimal(rowOT.GetCell(j))??0;
                                     salaryM.UserID = User.Username;
                                     salaryM.TeamID = TeamID;
                                     var stringDay = (j - 3).ToString() + "/" + Mounth.ToString() + "/" + Year.ToString();
                                     salaryM.Date = DateTime.ParseExact(stringDay, "d/M/yyyy", CultureInfo.InvariantCulture);
-                                    salaryM.UnitPerHour = UnitPerHour;
+                                    salaryM.UnitPerHour = UnitPerHour??0;
                                     salaryM.Allowance = allow;
                                     db.Salaries.Add(salaryM);
                                 }
@@ -198,7 +198,7 @@ namespace Kimeco_ASP.Areas.Admin.Controllers
                             flat += 3;
                         }
 
-                        ViewBag.Message = "Cập nhật thành công! <a class=\"btn\" href=\"/admin/home\">Về trang chủ</a>";
+                        ViewBag.Message = "Cập nhật thành công! <a class=\"btn\" href=\"/admin/salaries\">Về trang chủ</a>";
                         db.SaveChanges();
                         fsIndex.Close();
                         fsTemplate.Close();
@@ -254,30 +254,79 @@ namespace Kimeco_ASP.Areas.Admin.Controllers
                 XSSFWorkbook wbTemplate = new XSSFWorkbook(fsTemplate);
                 var sheetTemplate = wbTemplate.GetSheetAt(0);
                 var rowTemplate1 = sheetTemplate.GetRow(2);
-                var listMouth = listSalary.Select(x => x.Date).GroupBy(y => new { y.Value.Month, y.Value.Year }).ToList();
+                //lấy ra danh sách các tháng
+                var listMouth = listSalary.Select(x => x.Date).GroupBy(y => new { y.Month, y.Year }).ToList();
                 
                 string ReportFileName = team.Name + "_Report.xlsx";
                 string REportPath = Path.Combine(Server.MapPath("~/App_Data/uploads"), ReportFileName);
                 FileStream fsReport = new FileStream(REportPath, FileMode.Create);
                 int flat = 2;
-                foreach (var item in listMouth)
+                foreach (var mounth in listMouth)
                 {
                     if (flat != 2)
                     {
                         sheetTemplate.CopyRow(2, flat);
                         sheetTemplate.CopyRow(3, flat + 1);
                     }
-                    sheetTemplate.GetRow(flat).CreateCell(4).SetCellValue(item.Key.Month.ToString() + "/" + item.Key.Year.ToString());
+                    sheetTemplate.GetRow(flat).CreateCell(4).SetCellValue(mounth.Key.Month.ToString() + "/" + mounth.Key.Year.ToString());
                     flat += 2;
-                    var listEmployee = listSalary.Where(x => x.Date.Value.Month == item.Key.Month && x.Date.Value.Year == item.Key.Year).Select(y => y.User).GroupBy(z=>z.Username);
+                    //dah sách các nhân viên distinct 
+                    var listEmployee = listSalary.Where(x => x.Date.Month == mounth.Key.Month && x.Date.Year == mounth.Key.Year).Select(y => y.User).GroupBy(z=>new { z.Username });
                     foreach(var employee in listEmployee)
                     {
                         var row1 = sheetTemplate.CreateRow(flat);
                         var row2 = sheetTemplate.CreateRow(flat + 1);
                         var row3 = sheetTemplate.CreateRow(flat + 2);
+                        decimal unitperhour = 0;
+                        var firstUnitperHour = listSalary.Where(x =>x.Date.Month == mounth.Key.Month && x.Date.Year == mounth.Key.Year && x.UserID == employee.Key.Username).FirstOrDefault();
+                        if (firstUnitperHour != null)
+                        {
+                            unitperhour = firstUnitperHour.UnitPerHour;
+                        }
+                        for (int day = 1;day <= 31; day++)
+                        {
+                            var dayM = listSalary.Where(x => x.Date.Day == day && x.Date.Month == mounth.Key.Month && x.Date.Year == mounth.Key.Year && x.WorkingTime == "M" && x.UserID == employee.Key.Username).SingleOrDefault();
+                            if (dayM != null)
+                            {
+                                row1.CreateCell(day + 3).SetCellValue(dayM.Value.ToString());
+                            }
+                            var dayA = listSalary.Where(x => x.Date.Day == day && x.Date.Month == mounth.Key.Month && x.Date.Year == mounth.Key.Year && x.WorkingTime == "A" && x.UserID == employee.Key.Username).SingleOrDefault();
+                            if (dayA != null)
+                            {
+                                row2.CreateCell(day + 3).SetCellValue(dayA.Value.ToString());
+                            }
+                            var dayOT = listSalary.Where(x => x.Date.Day == day && x.Date.Month == mounth.Key.Month && x.Date.Year == mounth.Key.Year && x.WorkingTime == "OT" && x.UserID == employee.Key.Username).SingleOrDefault();
+                            if (dayOT != null)
+                            {
+                                row3.CreateCell(day + 3).SetCellValue(dayOT.Value.ToString());
+                            }
+                        }
+                        //set user full name
+                        var user = db.Users.Find(employee.Key.Username);
+                        if (user != null)
+                        {
+                            row1.CreateCell(1).SetCellValue(user.Position);
+                            row1.CreateCell(2).SetCellValue(user.FullName);
+                        }
+                        row1.CreateCell(3).SetCellValue("M");
+                        row2.CreateCell(3).SetCellValue("A");
+                        row3.CreateCell(3).SetCellValue("OT");
+                        var totalM = listSalary.Where(x => x.Date.Month == mounth.Key.Month && x.Date.Year == mounth.Key.Year && x.WorkingTime == "M").Sum(x => x.Value);
+                        var totalA = listSalary.Where(x => x.Date.Month == mounth.Key.Month && x.Date.Year == mounth.Key.Year && x.WorkingTime == "A").Sum(x => x.Value);
+                        var totalOT = listSalary.Where(x => x.Date.Month == mounth.Key.Month && x.Date.Year == mounth.Key.Year && x.WorkingTime == "OT").Sum(x => x.Value);
+                        row1.CreateCell(35).SetCellValue(totalM.ToString());
+                        row1.CreateCell(37).SetCellValue(unitperhour.ToString());
+                        row1.CreateCell(38).SetCellValue((totalM * unitperhour).ToString());
+
+                        row2.CreateCell(35).SetCellValue(totalA.ToString());
+                        row2.CreateCell(37).SetCellValue(unitperhour.ToString());
+                        row2.CreateCell(38).SetCellValue((totalA * unitperhour).ToString());
+
+                        row3.CreateCell(35).SetCellValue(totalOT.ToString());
+                        row3.CreateCell(37).SetCellValue(unitperhour.ToString());
+                        row3.CreateCell(38).SetCellValue((totalOT * unitperhour).ToString());
                         flat += 3;
                     }
-                   
                 }
                 
                 wbTemplate.Write(fsReport);

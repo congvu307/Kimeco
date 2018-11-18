@@ -37,6 +37,21 @@
     <Property Name="Note" Type="nvarchar" MaxLength="50" />
     <Property Name="Status" Type="bit" />
   </EntityType>
+  <EntityType Name="Company">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="250" />
+    <Property Name="Address" Type="nvarchar" MaxLength="250" />
+    <Property Name="Phone" Type="nvarchar" MaxLength="50" />
+    <Property Name="ProjectID" Type="int" />
+    <Property Name="Email" Type="nvarchar" MaxLength="50" />
+    <Property Name="Note" Type="nvarchar" MaxLength="255" />
+    <Property Name="CreateDate" Type="datetime" />
+    <Property Name="CreateBy" Type="int" />
+    <Property Name="Status" Type="bit" />
+  </EntityType>
   <EntityType Name="Cost">
     <Key>
       <PropertyRef Name="ID" />
@@ -47,8 +62,7 @@
     <Property Name="UnitPrice" Type="decimal" Precision="18" Scale="0" />
     <Property Name="SubTotal" Type="decimal" Precision="18" Scale="0" />
     <Property Name="Date" Type="datetime" />
-    <Property Name="ProjectID" Type="int" />
-    <Property Name="Conpany" Type="nvarchar" MaxLength="255" />
+    <Property Name="ConpanyID" Type="int" />
     <Property Name="Tax" Type="decimal" Precision="18" Scale="0" />
     <Property Name="CreateDate" Type="datetime" />
     <Property Name="CreateBy" Type="int" />
@@ -101,9 +115,9 @@
     </Key>
     <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="UserID" Type="nvarchar" MaxLength="50" />
-    <Property Name="WorkingTime" Type="nvarchar" MaxLength="50" />
-    <Property Name="Date" Type="datetime" />
-    <Property Name="UnitPerHour" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="WorkingTime" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Date" Type="datetime" Nullable="false" />
+    <Property Name="UnitPerHour" Type="decimal" Precision="18" Scale="0" Nullable="false" />
     <Property Name="Advanced" Type="nvarchar" MaxLength="255" />
     <Property Name="Allowance" Type="decimal" Precision="18" Scale="0" />
     <Property Name="TeamID" Type="int" />
@@ -111,7 +125,7 @@
     <Property Name="CreateBy" Type="int" />
     <Property Name="Status" Type="nvarchar" MaxLength="50" />
     <Property Name="Note" Type="nvarchar" MaxLength="255" />
-    <Property Name="Value" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="Value" Type="decimal" Precision="18" Scale="0" Nullable="false" />
     <Property Name="Sign" Type="nvarchar" MaxLength="255" />
   </EntityType>
   <EntityType Name="Team">
@@ -153,6 +167,30 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_Company_Project">
+    <End Role="Project" Type="Self.Project" Multiplicity="0..1" />
+    <End Role="Company" Type="Self.Company" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Project">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Company">
+        <PropertyRef Name="ProjectID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Cost_Company">
+    <End Role="Company" Type="Self.Company" Multiplicity="0..1" />
+    <End Role="Cost" Type="Self.Cost" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Company">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Cost">
+        <PropertyRef Name="ConpanyID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_Salary_User">
     <End Role="User" Type="Self.User" Multiplicity="0..1" />
     <End Role="Salary" Type="Self.Salary" Multiplicity="*" />
@@ -172,6 +210,7 @@
   <EntityContainer Name="KimecoModelStoreContainer">
     <EntitySet Name="Cash" EntityType="Self.Cash" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="CashReport" EntityType="Self.CashReport" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Company" EntityType="Self.Company" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Cost" EntityType="Self.Cost" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Equipment_Category" EntityType="Self.Equipment_Category" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="History" EntityType="Self.History" Schema="dbo" store:Type="Tables" />
@@ -182,6 +221,14 @@
     <AssociationSet Name="FK_CashReport_Project" Association="Self.FK_CashReport_Project">
       <End Role="Project" EntitySet="Project" />
       <End Role="CashReport" EntitySet="CashReport" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Company_Project" Association="Self.FK_Company_Project">
+      <End Role="Project" EntitySet="Project" />
+      <End Role="Company" EntitySet="Company" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Cost_Company" Association="Self.FK_Cost_Company">
+      <End Role="Company" EntitySet="Company" />
+      <End Role="Cost" EntitySet="Cost" />
     </AssociationSet>
     <AssociationSet Name="FK_Salary_User" Association="Self.FK_Salary_User">
       <End Role="User" EntitySet="User" />

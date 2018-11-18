@@ -16,18 +16,21 @@ namespace Kimeco_ASP.Areas.Admin.Controllers
         private KimecoEntities db = new KimecoEntities();
 
         [HttpGet]
+        [Authorize]
         public FileResult TemplateUpdate()
         {
             string fileDir = Path.Combine(Server.MapPath("~/App_Data/templates"), "SiteCost_Template.xlsx");
             return File(fileDir, System.Net.Mime.MediaTypeNames.Application.Octet, "SiteCost_Template.xlsx");
         }
         // GET: Admin/Costs
+        [Authorize]
         public ActionResult Index()
         {
             return View(db.Costs.ToList());
         }
 
         // GET: Admin/Costs/Details/5
+        [Authorize]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -43,6 +46,7 @@ namespace Kimeco_ASP.Areas.Admin.Controllers
         }
 
         // GET: Admin/Costs/Create
+        [Authorize]
         public ActionResult Create()
         {
             return View();
@@ -52,6 +56,7 @@ namespace Kimeco_ASP.Areas.Admin.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        [Authorize]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ID,Item,Unit,UnitPrice,SubTotal,Date,ProjectID,Conpany,Tax,CreateDate,CreateBy,Status,Note,Quantity,VAT,Total")] Cost cost)
         {
@@ -66,6 +71,7 @@ namespace Kimeco_ASP.Areas.Admin.Controllers
         }
 
         // GET: Admin/Costs/Edit/5
+        [Authorize]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -84,6 +90,7 @@ namespace Kimeco_ASP.Areas.Admin.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        [Authorize]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "ID,Item,Unit,UnitPrice,SubTotal,Date,ProjectID,Conpany,Tax,CreateDate,CreateBy,Status,Note,Quantity,VAT,Total")] Cost cost)
         {
@@ -97,6 +104,7 @@ namespace Kimeco_ASP.Areas.Admin.Controllers
         }
 
         // GET: Admin/Costs/Delete/5
+        [Authorize]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -114,6 +122,7 @@ namespace Kimeco_ASP.Areas.Admin.Controllers
         // POST: Admin/Costs/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public ActionResult DeleteConfirmed(int id)
         {
             Cost cost = db.Costs.Find(id);

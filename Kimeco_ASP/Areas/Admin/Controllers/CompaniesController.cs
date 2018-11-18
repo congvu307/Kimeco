@@ -10,115 +10,112 @@ using Kimeco_ASP.Models;
 
 namespace Kimeco_ASP.Areas.Admin.Controllers
 {
-    public class CashReportsController : Controller
+    public class CompaniesController : Controller
     {
         private KimecoEntities db = new KimecoEntities();
 
-        // GET: Admin/CashReports
-        [Authorize]
+        // GET: Admin/Companies
         public ActionResult Index()
         {
-            return View(db.CashReports.ToList());
+            var companies = db.Companies.Include(c => c.Project);
+            return View(companies.ToList());
         }
 
-        // GET: Admin/CashReports/Details/5
-        [Authorize]
+        // GET: Admin/Companies/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            CashReport cashReport = db.CashReports.Find(id);
-            if (cashReport == null)
+            Company company = db.Companies.Find(id);
+            if (company == null)
             {
                 return HttpNotFound();
             }
-            return View(cashReport);
+            return View(company);
         }
 
-        // GET: Admin/CashReports/Create
-        [Authorize]
+        // GET: Admin/Companies/Create
         public ActionResult Create()
         {
+            ViewBag.ProjectID = new SelectList(db.Projects, "ID", "Name");
             return View();
         }
 
-        // POST: Admin/CashReports/Create
+        // POST: Admin/Companies/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [Authorize]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,Date,ProjectName,LastMonthRemain,SubTotalInput,SubTotalOutput,BankRemain,CashInHand,ProjectTotal,CreateDate,CreateBy,Note,Status")] CashReport cashReport)
+        public ActionResult Create([Bind(Include = "ID,Name,Address,Phone,ProjectID,Email,Note,CreateDate,CreateBy,Status")] Company company)
         {
             if (ModelState.IsValid)
             {
-                db.CashReports.Add(cashReport);
+                db.Companies.Add(company);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(cashReport);
+            ViewBag.ProjectID = new SelectList(db.Projects, "ID", "Name", company.ProjectID);
+            return View(company);
         }
 
-        // GET: Admin/CashReports/Edit/5
-        [Authorize]
+        // GET: Admin/Companies/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            CashReport cashReport = db.CashReports.Find(id);
-            if (cashReport == null)
+            Company company = db.Companies.Find(id);
+            if (company == null)
             {
                 return HttpNotFound();
             }
-            return View(cashReport);
+            ViewBag.ProjectID = new SelectList(db.Projects, "ID", "Name", company.ProjectID);
+            return View(company);
         }
 
-        // POST: Admin/CashReports/Edit/5
+        // POST: Admin/Companies/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [Authorize]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,Date,ProjectName,LastMonthRemain,SubTotalInput,SubTotalOutput,BankRemain,CashInHand,ProjectTotal,CreateDate,CreateBy,Note,Status")] CashReport cashReport)
+        public ActionResult Edit([Bind(Include = "ID,Name,Address,Phone,ProjectID,Email,Note,CreateDate,CreateBy,Status")] Company company)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(cashReport).State = EntityState.Modified;
+                db.Entry(company).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(cashReport);
+            ViewBag.ProjectID = new SelectList(db.Projects, "ID", "Name", company.ProjectID);
+            return View(company);
         }
 
-        // GET: Admin/CashReports/Delete/5
-        [Authorize]
+        // GET: Admin/Companies/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            CashReport cashReport = db.CashReports.Find(id);
-            if (cashReport == null)
+            Company company = db.Companies.Find(id);
+            if (company == null)
             {
                 return HttpNotFound();
             }
-            return View(cashReport);
+            return View(company);
         }
 
-        // POST: Admin/CashReports/Delete/5
-        [Authorize]
+        // POST: Admin/Companies/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            CashReport cashReport = db.CashReports.Find(id);
-            db.CashReports.Remove(cashReport);
+            Company company = db.Companies.Find(id);
+            db.Companies.Remove(company);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

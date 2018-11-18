@@ -13,6 +13,7 @@ namespace Kimeco_ASP.Areas.Admin.Controllers
         KimecoEntities db = new KimecoEntities();
         // GET: Admin/Login
         [HttpGet]
+
         public ActionResult Index()
         {
             return View();

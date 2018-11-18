@@ -15,12 +15,12 @@ namespace Kimeco_ASP.Areas.Admin.Controllers
         private KimecoEntities db = new KimecoEntities();
 
         // GET: Admin/Teams
-        [Authorize]
         public ActionResult Index()
         {
             return View(db.Teams.ToList());
         }
 
+        [Authorize(Roles = "Admin")]
         // GET: Admin/Teams/Details/5
         public ActionResult Details(int? id)
         {
@@ -35,7 +35,7 @@ namespace Kimeco_ASP.Areas.Admin.Controllers
             }
             return View(team);
         }
-
+        [Authorize(Roles = "Admin")]
         // GET: Admin/Teams/Create
         public ActionResult Create()
         {
@@ -46,6 +46,7 @@ namespace Kimeco_ASP.Areas.Admin.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ID,Name,ProjectID,CreateDate,CreateBy,Status,Note")] Team team)
         {
@@ -60,6 +61,7 @@ namespace Kimeco_ASP.Areas.Admin.Controllers
         }
 
         // GET: Admin/Teams/Edit/5
+        [Authorize(Roles = "Admin")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -78,6 +80,7 @@ namespace Kimeco_ASP.Areas.Admin.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "ID,Name,ProjectID,CreateDate,CreateBy,Status,Note")] Team team)
         {
@@ -91,6 +94,7 @@ namespace Kimeco_ASP.Areas.Admin.Controllers
         }
 
         // GET: Admin/Teams/Delete/5
+        [Authorize(Roles = "Admin")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -108,6 +112,7 @@ namespace Kimeco_ASP.Areas.Admin.Controllers
         // POST: Admin/Teams/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public ActionResult DeleteConfirmed(int id)
         {
             Team team = db.Teams.Find(id);

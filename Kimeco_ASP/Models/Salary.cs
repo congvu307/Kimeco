@@ -17,8 +17,8 @@ namespace Kimeco_ASP.Models
         public int ID { get; set; }
         public string UserID { get; set; }
         public string WorkingTime { get; set; }
-        public Nullable<System.DateTime> Date { get; set; }
-        public Nullable<decimal> UnitPerHour { get; set; }
+        public System.DateTime Date { get; set; }
+        public decimal UnitPerHour { get; set; }
         public string Advanced { get; set; }
         public Nullable<decimal> Allowance { get; set; }
         public Nullable<int> TeamID { get; set; }
@@ -26,7 +26,7 @@ namespace Kimeco_ASP.Models
         public Nullable<int> CreateBy { get; set; }
         public string Status { get; set; }
         public string Note { get; set; }
-        public Nullable<decimal> Value { get; set; }
+        public decimal Value { get; set; }
         public string Sign { get; set; }
     
         public virtual User User { get; set; }

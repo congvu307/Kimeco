@@ -178,6 +178,7 @@
     <Compile Include="Areas\Admin\Code\CustomRoleProvider.cs" />
     <Compile Include="Areas\Admin\Controllers\CashesController.cs" />
     <Compile Include="Areas\Admin\Controllers\CashReportsController.cs" />
+    <Compile Include="Areas\Admin\Controllers\CompaniesController.cs" />
     <Compile Include="Areas\Admin\Controllers\CostsController.cs" />
     <Compile Include="Areas\Admin\Controllers\Equipment_CategoryController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
@@ -194,6 +195,9 @@
       <DependentUpon>KimecoDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CashReport.cs">
+      <DependentUpon>KimecoDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Company.cs">
       <DependentUpon>KimecoDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Cost.cs">
@@ -992,6 +996,11 @@
     <Content Include="Areas\Admin\Views\Users\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Users\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Salaries\Spending.cshtml" />
+    <Content Include="Areas\Admin\Views\Companies\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Companies\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Companies\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Companies\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Companies\Index.cshtml" />
     <None Include="packages.config" />
     <Content Include="Views\Home\History.cshtml" />
     <Content Include="Scripts\umd\popper.min.js.map" />
