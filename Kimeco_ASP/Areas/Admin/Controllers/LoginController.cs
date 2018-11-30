@@ -35,7 +35,7 @@ namespace Kimeco_ASP.Areas.Admin.Controllers
                     Response.Cookies["username"].Expires = DateTime.Now.AddYears(1);
                 }
 
-                return Redirect("/admin/home");
+                return Redirect("/admin/cashes");
             }
             else
             {

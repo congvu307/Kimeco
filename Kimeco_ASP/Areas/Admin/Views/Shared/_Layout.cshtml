@@ -71,24 +71,21 @@
     <div id="sidebar">
         <a href="#" class="visible-phone"><i class="icon icon-home"></i> Dashboard</a>
         <ul>
-            <li><a href="#"><i class="icon icon-home"></i> <span>Dashboard</span></a> </li>
+            @*<li><a href="#"><i class="icon icon-home"></i> <span>Dashboard</span></a> </li>*@
             <li><a href="/admin/cashes"><i class="icon icon-money"></i> <span>Cashes</span></a> </li>
             <li><a href="/admin/costs"><i class="icon icon-signal"></i> <span>Site Costs</span></a> </li>
             <li> <a href="/admin/Equipment_Category"><i class="icon icon-th-list"></i> Equipment Category</a> </li>
             <li> <a href="/admin/salaries"><i class="icon icon-inbox"></i> <span>Salary</span></a> </li>
-
-            @{
-                if (Request.Cookies["position"] != null)
+            @if (Request.Cookies["position"] != null)
+            {
+                if (Request.Cookies["position"].Value == "Admin")
                 {
-                    if (Request.Cookies["position"].Value == "Admin")
-                    {
-                        <li><a href="/admin/users"><i class="icon icon-th"></i> <span>User</span></a></li>
-                        <li><a href="/admin/teams"><i class="icon icon-bullhorn"></i> <span>Teams</span></a></li>
-                        <li><a href="/admin/companies"><i class="icon icon-desktop"></i> <span>Company</span></a></li>
-                        <li><a href="/admin/projects"><i class="icon icon-building"></i> <span>Projects</span></a> </li>
-                    }
+                    <li><a href="/admin/users"><i class="icon icon-th"></i> <span>User</span></a></li>
                 }
             }
+            <li><a href="/admin/teams"><i class="icon icon-bullhorn"></i> <span>Teams</span></a></li>
+            <li><a href="/admin/companies"><i class="icon icon-desktop"></i> <span>Company</span></a></li>
+            <li><a href="/admin/projects"><i class="icon icon-building"></i> <span>Projects</span></a> </li>
             <li> <a target="_blank" href="/Content/Kimeco_Document.pdf"><i class="icon icon-heart"></i> <span>Kimeco Document</span></a> </li>
             @*<li><a href="#"><i class="icon icon-fullscreen"></i> <span>Full width</span></a></li>
         <li class="submenu">
@@ -140,7 +137,7 @@
     </div>
     <div id="content">
         <div id="content-header">
-            <div id="breadcrumb"> <a href="index.html" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a></div>
+            <div id="breadcrumb"> <a href="/admin/" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home / @ViewBag.Title</a></div>
         </div>
         <div class="container-fluid">
             @RenderBody()

@@ -21,7 +21,7 @@
     <div class="nopadding">
         <table class="table data-table table-bordered dataTable">
             <tr>
-                <th>
+                <th style="font-weight:700">
                     @Html.DisplayNameFor(model => model.Item)
                 </th>
                 <th>
@@ -64,10 +64,10 @@
                         @Html.DisplayFor(modelItem => item.Unit)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.UnitPrice)
+                        @String.Format("{0:C}", item.UnitPrice)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.SubTotal)
+                        @String.Format("{0:C}", item.SubTotal)
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.Date)
@@ -86,7 +86,7 @@
                         @Html.DisplayFor(modelItem => item.VAT)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Total)
+                        @String.Format("{0:C}", item.Total)
                     </td>
                     <td>
                         @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |

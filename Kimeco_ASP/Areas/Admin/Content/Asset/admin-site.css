@@ -5,3 +5,14 @@
 .select2-container {
     width: 81%;
 }
+.header-group .btn {
+    min-width:150px;
+    max-width:150px;
+}
+.header-group {
+    padding: 10px 0 50px 0;
+    text-align:center;
+}
+.dataTables_filter {
+    margin-top:-19px;
+}
