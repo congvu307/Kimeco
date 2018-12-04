@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<Kimeco_ASP.Models.Cash>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Cash";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 <div class="header-group">
@@ -13,8 +13,13 @@
         
     </div>
     <div class="span2">
-        <a href="/admin/home/Cash_MultiUpload">Upload with Excel</a><br />
-        <a href="/admin/cashes/spending">Spending</a>
+        <a href="/admin/home/Cash_MultiUpload"><i class="icon icon-upload"></i> Upload with Excel</a><br />
+        @{ 
+            var NumberOfSpending = ViewBag.NumberOfSpending as int?;
+
+        }
+        <hr style="margin:3px;"/>
+        <a href="/admin/cashes/spending">Pending @if(NumberOfSpending > 0){<span class="date badge badge-important">@ViewBag.NumberOfSpending</span>}</a>
     </div>
     <div class="span3">
         <form method="post" action="/admin/home/Cashes_Report">
@@ -27,13 +32,13 @@
                     <option value="@item.ID">@item.Name</option>
                 }
             </select>
-            <input type="submit" class="btn" value="Export Report" />
+            <input type="submit" class="btn" value=" Export Report" />
         </form>
     </div>
 
     <div class="span3">
-        <a class="btn" href="~/Admin/Home/Cash_TotalReport">Total Report</a> <br />
-        <a class="btn" href="~/Admin/Home/Cash_General_Report">General Report</a>
+        <a class="btn export" href="~/Admin/Home/Cash_TotalReport"><i class="icon icon-download"></i> Total Report </a> <br />
+        <a class="btn export" href="~/Admin/Home/Cash_General_Report"><i class="icon icon-download"></i> General Report </a>
     </div>
 </div>
 <div id="d_CashMultiUpload">
@@ -42,12 +47,7 @@
 
 </div>
 <div class="widget-box">
-    <div class="widget-title">
-        <span class="icon">
-            <i class="icon-th"></i>
-        </span>
-        <h5>Cash Table</h5>
-    </div>
+   
     <div class="nopadding">
         <table class="table data-table table-bordered dataTable">
             <thead>

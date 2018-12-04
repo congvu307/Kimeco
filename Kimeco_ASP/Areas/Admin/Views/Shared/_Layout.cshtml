@@ -1,7 +1,7 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Kimeco admin</title>
+    <title>Admin - @ViewBag.Title</title>
     <link rel="shortcut icon" type="image/x-icon" href="/favicon.png" />
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -33,7 +33,8 @@
     <!--top-Header-menu-->
     <div id="user-nav" class="navbar navbar-inverse">
         <ul class="nav">
-            <li class="dropdown" id="profile-messages">
+            
+            @*<li class="dropdown" id="profile-messages">
                 <a title="" href="#" data-toggle="dropdown" data-target="#profile-messages" class="dropdown-toggle"><i class="icon icon-user"></i>  <span class="text">Welcome User</span><b class="caret"></b></a>
                 <ul class="dropdown-menu">
                     <li><a href="#"><i class="icon-user"></i> My Profile</a></li>
@@ -55,7 +56,7 @@
                     <li><a class="sTrash" title="" href="#"><i class="icon-trash"></i> trash</a></li>
                 </ul>
             </li>
-            <li class=""><a title="" href="#"><i class="icon icon-cog"></i> <span class="text">Settings</span></a></li>
+            <li class=""><a title="" href="#"><i class="icon icon-cog"></i> <span class="text">Settings</span></a></li>*@
             <li class=""><a title="" href="/admin/login/logout"><i class="icon icon-share-alt"></i> <span class="text">Logout</span></a></li>
         </ul>
     </div>
@@ -72,10 +73,11 @@
         <a href="#" class="visible-phone"><i class="icon icon-home"></i> Dashboard</a>
         <ul>
             @*<li><a href="#"><i class="icon icon-home"></i> <span>Dashboard</span></a> </li>*@
-            <li><a href="/admin/cashes"><i class="icon icon-money"></i> <span>Cashes</span></a> </li>
-            <li><a href="/admin/costs"><i class="icon icon-signal"></i> <span>Site Costs</span></a> </li>
-            <li> <a href="/admin/Equipment_Category"><i class="icon icon-th-list"></i> Equipment Category</a> </li>
+            <li><a href="/admin/cashes"><i class="icon icon-money"></i> <span>Cash</span></a> </li>
+            <li><a href="/admin/costs"><i class="icon icon-signal"></i> <span>Site Cost</span></a> </li>
+
             <li> <a href="/admin/salaries"><i class="icon icon-inbox"></i> <span>Salary</span></a> </li>
+            <hr />
             @if (Request.Cookies["position"] != null)
             {
                 if (Request.Cookies["position"].Value == "Admin")
@@ -83,9 +85,10 @@
                     <li><a href="/admin/users"><i class="icon icon-th"></i> <span>User</span></a></li>
                 }
             }
-            <li><a href="/admin/teams"><i class="icon icon-bullhorn"></i> <span>Teams</span></a></li>
+            <li> <a href="/admin/Equipment_Category"><i class="icon icon-th-list"></i> Equipment Category</a> </li>
+            <li><a href="/admin/teams"><i class="icon icon-bullhorn"></i> <span>Team</span></a></li>
             <li><a href="/admin/companies"><i class="icon icon-desktop"></i> <span>Company</span></a></li>
-            <li><a href="/admin/projects"><i class="icon icon-building"></i> <span>Projects</span></a> </li>
+            <li><a href="/admin/projects"><i class="icon icon-building"></i> <span>Project</span></a> </li>
             <li> <a target="_blank" href="/Content/Kimeco_Document.pdf"><i class="icon icon-heart"></i> <span>Kimeco Document</span></a> </li>
             @*<li><a href="#"><i class="icon icon-fullscreen"></i> <span>Full width</span></a></li>
         <li class="submenu">

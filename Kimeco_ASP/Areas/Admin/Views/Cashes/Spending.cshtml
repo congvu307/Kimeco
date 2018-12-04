@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<Kimeco_ASP.Models.Cash>
 
 @{
-    ViewBag.Title = "Spending";
+    ViewBag.Title = "Cash Spending";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
@@ -98,7 +98,7 @@
                             @Html.DisplayFor(modelItem => item.Ref)
                         </td>
                         <td>
-                            <a class="cash-approve" data-id="@item.ID" href="#">Approve</a>
+                            <a class="cash-approve btn" style="" data-id="@item.ID" href="#">Approve</a>
                         </td>
                     </tr>
                 }

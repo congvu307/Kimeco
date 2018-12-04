@@ -16,3 +16,11 @@
 .dataTables_filter {
     margin-top:-19px;
 }
+.cash-approve {
+    background-color: royalblue;
+    color: white
+}
+.export {
+    text-align: left !important;
+    padding-left:30px;
+}

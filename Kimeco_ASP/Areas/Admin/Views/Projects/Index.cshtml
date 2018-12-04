@@ -1,12 +1,9 @@
 ﻿@model IEnumerable<Kimeco_ASP.Models.Project>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Project";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
-
-<h2>Project</h2>
-
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
@@ -15,7 +12,7 @@
         <span class="icon">
             <i class="icon-th"></i>
         </span>
-        <h5>Project Table</h5>
+        <h5>Project</h5>
     </div>
     <div class="nopadding">
         <table class="table data-table table-bordered dataTable">
